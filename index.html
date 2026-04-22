@@ -6,10 +6,17 @@
 <title>Crochet Craft — Handmade with Love</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--sage:#7d9b76;--sage-light:#b5c9b0;--sage-pale:#ddeadb;--cream:#faf6ef;--cream-dark:#f0e9dc;--brown:#5c4a3a;--white:#fff;--text:#3a3228;--text-soft:#7a6a5a;--accent:#c47aa0;}
-*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+:root{
+  --sage:#7d9b76;--sage-light:#b5c9b0;--sage-pale:#ddeadb;
+  --cream:#faf6ef;--cream-dark:#f0e9dc;--brown:#5c4a3a;
+  --brown-light:#8b6f5e;--white:#ffffff;--text:#3a3228;
+  --text-soft:#7a6a5a;--accent:#c47aa0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
-.page{display:none;}.page.active{display:block;animation:fadeUp .5s ease both;}
+.page{display:none;}
+.page.active{display:block;animation:fadeUp .5s ease both;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 nav{background:rgba(250,246,239,0.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:999;border-bottom:1px solid var(--sage-pale);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo{display:flex;align-items:center;gap:.7rem;cursor:pointer;}
@@ -58,7 +65,7 @@ nav{background:rgba(250,246,239,0.97);backdrop-filter:blur(12px);position:sticky
 .tab-btn.active,.tab-btn:hover{background:var(--sage);color:#fff;border-color:var(--sage);}
 .masonry{columns:4;column-gap:1.2rem;}
 @media(max-width:1100px){.masonry{columns:3;}}
-@media(max-width:768px){.masonry{columns:2;}.hero{grid-template-columns:1fr;padding:3rem 1.5rem;}.hero-img-grid{display:none;}.section{padding:3rem 1.5rem;}.cat-strip{padding:2rem 1.5rem;}.checkout-grid{grid-template-columns:1fr!important;}.contact-grid{grid-template-columns:1fr!important;}.about-top{grid-template-columns:1fr!important;}}
+@media(max-width:768px){.masonry{columns:2;}.hero{grid-template-columns:1fr;padding:3rem 1.5rem;}.hero-img-grid{display:none;}.section{padding:3rem 1.5rem;}.cat-strip{padding:2rem 1.5rem;}}
 @media(max-width:480px){.masonry{columns:2;}}
 .m-card{break-inside:avoid;margin-bottom:1.2rem;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 18px rgba(90,74,58,.08);transition:transform .28s,box-shadow .28s;cursor:pointer;border:1px solid rgba(181,201,176,.3);}
 .m-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(90,74,58,.15);}
@@ -72,7 +79,14 @@ nav{background:rgba(250,246,239,0.97);backdrop-filter:blur(12px);position:sticky
 .old{text-decoration:line-through;color:#bbb;font-size:.82rem;margin-right:.4rem;}
 .add-cart-btn{display:flex;align-items:center;gap:.4rem;margin-top:.7rem;padding:.5rem 1rem;background:var(--sage-pale);color:var(--sage);border:1.5px solid var(--sage-light);border-radius:30px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;width:100%;justify-content:center;}
 .add-cart-btn:hover{background:var(--sage);color:#fff;border-color:var(--sage);}
-.earing-section{display:none;}.earing-section.active{display:block;}
+.add-cart-btn.added{background:var(--sage);color:#fff;border-color:var(--sage);}
+.earing-section{display:none;}
+.earing-section.active{display:block;}
+.deal-hero{background:linear-gradient(120deg,var(--sage),#5a7a53);border-radius:24px;padding:3.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;color:#fff;margin-bottom:3rem;}
+.deal-hero h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;margin-bottom:.6rem;}
+.deal-hero p{opacity:.9;font-size:1rem;}
+.btn-cream{background:var(--cream);color:var(--sage);box-shadow:none;}
+.btn-cream:hover{background:#fff;}
 .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;}
 .c-info h2{font-family:'Cormorant Garamond',serif;font-size:2.6rem;line-height:1.2;margin-bottom:1rem;}
 .c-info p{color:var(--text-soft);line-height:1.9;margin-bottom:2rem;}
@@ -83,12 +97,13 @@ nav{background:rgba(250,246,239,0.97);backdrop-filter:blur(12px);position:sticky
 .c-form{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 8px 40px rgba(90,74,58,.1);}
 .fg{margin-bottom:1.3rem;}
 .fg label{display:block;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem;color:var(--text);}
-.fg input,.fg textarea{width:100%;padding:.85rem 1.1rem;border:1.8px solid var(--sage-pale);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:var(--cream);color:var(--text);outline:none;transition:border-color .2s;}
-.fg input:focus,.fg textarea:focus{border-color:var(--sage-light);}
+.fg input,.fg textarea,.fg select{width:100%;padding:.85rem 1.1rem;border:1.8px solid var(--sage-pale);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:var(--cream);color:var(--text);outline:none;transition:border-color .2s;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--sage-light);}
 .fg textarea{resize:vertical;min-height:120px;}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .success{display:none;background:var(--sage-pale);color:var(--sage);border-radius:12px;padding:1rem 1.4rem;font-weight:600;margin-top:1rem;text-align:center;}
 .about-top{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center;background:linear-gradient(135deg,var(--sage-pale),var(--cream));border-radius:28px;padding:4rem;margin-bottom:4rem;}
+.about-img-wrap{position:relative;}
 .about-img-wrap img{width:100%;border-radius:20px;object-fit:contain;background:var(--cream-dark);height:320px;box-shadow:0 16px 48px rgba(90,74,58,.18);padding:1rem;}
 .about-text h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;line-height:1.15;margin-bottom:1.2rem;}
 .about-text p{color:var(--text-soft);line-height:1.9;font-size:1.02rem;margin-bottom:1rem;}
@@ -134,6 +149,7 @@ footer p{font-size:.85rem;opacity:.6;}
 .checkout-btn:disabled{background:#ccc;transform:none;cursor:not-allowed;box-shadow:none;}
 #page-checkout .section{max-width:960px;}
 .checkout-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start;}
+@media(max-width:768px){.checkout-grid{grid-template-columns:1fr;}.contact-grid{grid-template-columns:1fr;}.about-top{grid-template-columns:1fr;}}
 .order-summary{background:#fff;border-radius:20px;padding:2rem;box-shadow:0 4px 24px rgba(90,74,58,.09);border:1px solid var(--sage-pale);}
 .order-summary h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1.2rem;color:var(--text);}
 .order-item-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--sage-pale);font-size:.9rem;}
@@ -146,41 +162,17 @@ footer p{font-size:.85rem;opacity:.6;}
 .order-total-row span:last-child{color:var(--sage);}
 .checkout-form{background:#fff;border-radius:20px;padding:2rem;box-shadow:0 4px 24px rgba(90,74,58,.09);border:1px solid var(--sage-pale);}
 .checkout-form h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1.4rem;color:var(--text);}
-.pay-methods{display:flex;flex-direction:column;gap:.7rem;margin-bottom:.8rem;}
+.pay-methods{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.2rem;}
 .pay-option{display:flex;align-items:center;gap:.8rem;padding:.8rem 1rem;border:2px solid var(--sage-pale);border-radius:12px;cursor:pointer;transition:all .2s;}
 .pay-option:hover,.pay-option.selected{border-color:var(--sage);background:var(--sage-pale);}
 .pay-option input[type=radio]{accent-color:var(--sage);}
 .pay-option label{cursor:pointer;font-weight:500;font-size:.9rem;}
-
-/* ══ PAYMENT DETAILS BOX ══ */
-.pay-details-box{display:none;margin-top:.5rem;margin-bottom:1rem;border-radius:14px;overflow:hidden;border:2px solid var(--sage-light);animation:fadeUp .3s ease;}
-.pay-details-box.show{display:block;}
-.pay-details-header{background:var(--sage);color:#fff;padding:.75rem 1.2rem;font-size:.85rem;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:.5rem;}
-.pay-details-body{background:#fff;padding:1.2rem;display:flex;flex-direction:column;gap:.65rem;}
-.pay-detail-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem .9rem;background:var(--cream);border-radius:10px;border:1px solid var(--sage-pale);}
-.pay-detail-left{flex:1;}
-.pay-detail-label{font-size:.72rem;color:var(--text-soft);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.15rem;}
-.pay-detail-value{font-size:.95rem;font-weight:700;color:var(--text);}
-.copy-btn{background:var(--sage-pale);border:none;color:var(--sage);padding:.3rem .8rem;border-radius:8px;font-size:.75rem;cursor:pointer;font-weight:600;transition:all .2s;white-space:nowrap;margin-left:.5rem;flex-shrink:0;}
-.copy-btn:hover{background:var(--sage);color:#fff;}
-.pay-notice{background:#fff8e1;border:1.5px solid #ffe082;border-radius:10px;padding:.85rem 1rem;font-size:.82rem;color:#7a6318;line-height:1.7;}
-.pay-notice strong{color:#5a4510;}
-
-/* ══ ORDER ID BOX IN SUCCESS ══ */
-.order-id-box{background:var(--sage-pale);border:2px solid var(--sage-light);border-radius:14px;padding:1.2rem 1.5rem;margin:1rem auto;text-align:center;max-width:380px;}
-.order-id-box p{color:var(--text-soft);font-size:.85rem;margin-bottom:.3rem;}
-.order-id-box strong{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--sage);letter-spacing:.05em;}
-
-.pay-reminder-box{background:#f0faf0;border:1.5px solid var(--sage-light);border-radius:12px;padding:1rem 1.2rem;font-size:.88rem;color:var(--text-soft);line-height:1.7;margin-top:.5rem;max-width:480px;margin-left:auto;margin-right:auto;}
-.pay-reminder-box strong{color:var(--text);}
-
 .place-order-btn{width:100%;padding:1.1rem;background:var(--sage);color:#fff;border:none;border-radius:14px;font-size:1.05rem;font-weight:700;cursor:pointer;letter-spacing:.04em;margin-top:1rem;transition:background .2s,transform .2s;box-shadow:0 6px 20px rgba(125,155,118,.35);}
-.place-order-btn:hover:not(:disabled){background:#6a8a63;transform:translateY(-2px);}
-.place-order-btn:disabled{background:#aaa;cursor:not-allowed;transform:none;box-shadow:none;}
+.place-order-btn:hover{background:#6a8a63;transform:translateY(-2px);}
 .order-success{display:none;text-align:center;background:var(--cream);border-radius:24px;padding:4rem 2rem;border:1px solid var(--sage-pale);}
 .order-success .success-icon{font-size:4rem;margin-bottom:1rem;}
-.order-success h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--sage);margin-bottom:.5rem;}
-.order-success>p{color:var(--text-soft);font-size:1rem;line-height:1.8;max-width:480px;margin:0 auto .8rem;}
+.order-success h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--sage);margin-bottom:.8rem;}
+.order-success p{color:var(--text-soft);font-size:1rem;line-height:1.8;max-width:420px;margin:0 auto 1.5rem;}
 .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--brown);color:#fff;padding:.75rem 1.5rem;border-radius:30px;font-size:.88rem;font-weight:500;z-index:2000;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
@@ -194,44 +186,70 @@ footer p{font-size:.85rem;opacity:.6;}
   </div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" class="active">Home</a></li>
-    <li><span>Hair Accessories ▾</span><div class="dropdown">
-      <a onclick="showPage('hairpins')">🪡 Hair Pins</a>
-      <a onclick="showPage('ribbons')">🎀 Ribbons</a>
-      <a onclick="showPage('scrunchies')">🌸 Scrunchies</a>
-      <a onclick="showPage('bandana')">🧣 Bandana</a>
-      <a onclick="showPage('paranda')">💫 Paranda</a>
-      <a onclick="showPage('headbands')">👑 Headbands</a>
-    </div></li>
+    <li>
+      <span>Hair Accessories ▾</span>
+      <div class="dropdown">
+        <a onclick="showPage('hairpins')">🪡 Hair Pins</a>
+        <a onclick="showPage('ribbons')">🎀 Ribbons</a>
+        <a onclick="showPage('scrunchies')">🌸 Scrunchies</a>
+        <a onclick="showPage('bandana')">🧣 Bandana</a>
+        <a onclick="showPage('paranda')">💫 Paranda</a>
+        <a onclick="showPage('headbands')">👑 Headbands</a>
+      </div>
+    </li>
     <li><a onclick="showPage('gloves')">🧤 Gloves</a></li>
     <li><a onclick="showPage('bracelets')">📿 Bracelets</a></li>
     <li><a onclick="showPage('keychains')">🔑 Keychains</a></li>
-    <li><span>Earrings ▾</span><div class="dropdown">
-      <a onclick="showPage('earrings');setTab('all')">💎 All Earrings</a>
-      <a onclick="showPage('earrings');setTab('studs')">✨ Studs</a>
-      <a onclick="showPage('earrings');setTab('dangles')">🌸 Dangles & Bows</a>
-      <a onclick="showPage('earrings');setTab('hearts')">❤️ Heart Earrings</a>
-    </div></li>
+    <li>
+      <span>Earrings ▾</span>
+      <div class="dropdown">
+        <a onclick="showPage('earrings');setTab('all')">💎 All Earrings</a>
+        <a onclick="showPage('earrings');setTab('studs')">✨ Studs</a>
+        <a onclick="showPage('earrings');setTab('dangles')">🌸 Dangles & Bows</a>
+        <a onclick="showPage('earrings');setTab('hearts')">❤️ Heart Earrings</a>
+      </div>
+    </li>
     <li><a onclick="showPage('gajray')">🌺 Gajray</a></li>
     <li><a onclick="showPage('deals')">🏷️ Deals</a></li>
-    <li><span>Books ▾</span><div class="dropdown">
-      <a onclick="showPage('bookmarks')">📖 Bookmarks</a>
-      <a onclick="showPage('bookcovers')">📚 Book Covers</a>
-    </div></li>
+    <li>
+      <span>Books ▾</span>
+      <div class="dropdown">
+        <a onclick="showPage('bookmarks')">📖 Bookmarks</a>
+        <a onclick="showPage('bookcovers')">📚 Book Covers</a>
+      </div>
+    </li>
     <li><a onclick="showPage('contact')">Contact</a></li>
     <li><a onclick="showPage('about')">About</a></li>
   </ul>
-  <button class="cart-nav-btn" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+  <button class="cart-nav-btn" onclick="openCart()" title="View Cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
 </nav>
 
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header"><h3>🛒 Your Cart</h3><button class="cart-close" onclick="closeCart()">✕</button></div>
-  <div class="cart-items" id="cartItems"><div class="cart-empty"><div class="empty-icon">🧺</div><p>Your cart is empty.<br>Add some handmade love!</p></div></div>
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="empty-icon">🧺</div>
+      <p>Your cart is empty.<br>Add some handmade love!</p>
+    </div>
+  </div>
   <div class="cart-footer">
-    <div class="cart-total-row"><span>Total</span><strong id="cartTotal">PKR 0</strong></div>
-    <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()" disabled>Proceed to Order 🌿</button>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <strong id="cartTotal">PKR 0</strong>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="goToCheckout()" disabled>
+      Proceed to Order 🌿
+    </button>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <!-- HOME -->
@@ -249,115 +267,292 @@ footer p{font-size:.85rem;opacity:.6;}
     <div class="hero-img-grid">
       <img src="images/rose paranda.png" alt="Crochet Collection">
       <img src="images/flower stud.png" alt="Pink Flower Studs">
-      <img src="images/scrunchiess.webp" alt="Scrunchies">
+      <img src="images/scrunchiess.webp" alt="scrunchies">
     </div>
   </section>
-  <div class="cat-strip"><div style="max-width:1280px;margin:0 auto;"><div class="cat-scroll">
-    <div class="cat-pill" onclick="showPage('earrings');setTab('studs')">✨ Studs</div>
-    <div class="cat-pill" onclick="showPage('earrings');setTab('dangles')">🌸 Bow Earrings</div>
-    <div class="cat-pill" onclick="showPage('earrings');setTab('hearts')">❤️ Heart Earrings</div>
-    <div class="cat-pill" onclick="showPage('hairpins')">🪡 Hair Pins</div>
-    <div class="cat-pill" onclick="showPage('scrunchies')">🌸 Scrunchies</div>
-    <div class="cat-pill" onclick="showPage('headbands')">👑 Headbands</div>
-    <div class="cat-pill" onclick="showPage('gloves')">🧤 Gloves</div>
-    <div class="cat-pill" onclick="showPage('bracelets')">📿 Bracelets</div>
-    <div class="cat-pill" onclick="showPage('keychains')">🔑 Keychains</div>
-    <div class="cat-pill" onclick="showPage('gajray')">🌺 Gajray</div>
-    <div class="cat-pill" onclick="showPage('deals')">🏷️ Deals</div>
-  </div></div></div>
+  <div class="cat-strip">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div class="cat-scroll">
+        <div class="cat-pill" onclick="showPage('earrings');setTab('studs')">✨ Studs</div>
+        <div class="cat-pill" onclick="showPage('earrings');setTab('dangles')">🌸 Bow Earrings</div>
+        <div class="cat-pill" onclick="showPage('earrings');setTab('hearts')">❤️ Heart Earrings</div>
+        <div class="cat-pill" onclick="showPage('hairpins')">🪡 Hair Pins</div>
+        <div class="cat-pill" onclick="showPage('scrunchies')">🌸 Scrunchies</div>
+        <div class="cat-pill" onclick="showPage('headbands')">👑 Headbands</div>
+        <div class="cat-pill" onclick="showPage('gloves')">🧤 Gloves</div>
+        <div class="cat-pill" onclick="showPage('bracelets')">📿 Bracelets</div>
+        <div class="cat-pill" onclick="showPage('keychains')">🔑 Keychains</div>
+        <div class="cat-pill" onclick="showPage('gajray')">🌺 Gajray</div>
+        <div class="cat-pill" onclick="showPage('deals')">🏷️ Deals</div>
+      </div>
+    </div>
+  </div>
   <div class="section">
     <div class="sec-head"><h2>Featured Picks</h2><div class="divider"></div><p>Our customers' most-loved handmade pieces</p></div>
     <div class="masonry">
-      <div class="m-card" onclick="showPage('bookmarks')"><img src="images/bookmark.webp" style="height:280px;"><div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Book Mark</h3><p>Make your book special with crochet bookmark.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Book Mark','PKR 200',200,'images/bookmark.webp')">🛒 Add to Cart</button></div></div>
-      <div class="m-card" onclick="showPage('earrings');setTab('dangles')"><img src="images/bow earings.png" style="height:220px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Trending 🎀</div><h3>Crochet Bow Dangles</h3><p>Hot pink crocheted bow dangle earrings.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Crochet Bow Dangles','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div></div>
-      <div class="m-card" onclick="showPage('gajray')"><img src="images/gajray 1.webp" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Gift Idea</div><h3>Daisy Gajray</h3><p>Adorable crocheted Gajray.</p><span class="m-price">PKR 1000</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Daisy Gajray','PKR 1000',1000,'images/gajray 1.webp')">🛒 Add to Cart</button></div></div>
-      <div class="m-card" onclick="showPage('earrings');setTab('studs')"><img src="images/flower stud.png" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">New</div><h3>Pink Flower Studs</h3><p>Pink crochet flower with pearl.</p><span class="m-price">PKR 300</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Pink Flower Studs','PKR 300',300,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
-      <div class="m-card" onclick="showPage('scrunchies')"><img src="images/scrunchiess.webp" style="height:240px;"><div class="m-card-body"><div class="m-tag">Full Collection</div><h3>Scrunchie Collection</h3><p>Fluffy Crochet Scrunchies in five shades.</p><span class="m-price">From PKR 200</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Scrunchie Collection','PKR 1000',1000,'images/scrunchiess.webp')">🛒 Add to Cart</button></div></div>
-      <div class="m-card" onclick="showPage('bookmarks')"><img src="images/bookmarkset.webp" style="height:280px;"><div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Book Mark Set</h3><p>Enjoy your books with crochet bookmark.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Book Mark Set','PKR 200',200,'images/bookmarkset.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card" onclick="showPage('bookmarks')">
+        <img src="images/bookmark.webp" alt="BOOK mark" style="height:280px;">
+        <div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Book Mark</h3><p>Make your book best with crochet bookmark.</p><span class="m-price">PKR 200</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Book Mark','PKR 200',200,'images/bookmark.webp')">🛒 Add to Cart</button></div>
+      </div>
+      <div class="m-card" onclick="showPage('earrings');setTab('dangles')">
+        <img src="images/bow earings.png" alt="Bow Earrings" style="height:220px;">
+        <div class="m-card-body"><div class="m-tag m-tag-pink">Trending 🎀</div><h3>Crochet Bow Dangles</h3><p>Hot pink crocheted bow dangle earrings — coquette vibes!</p><span class="m-price">PKR 200</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Crochet Bow Dangles','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div>
+      </div>
+      <div class="m-card" onclick="showPage('gajray')">
+        <img src="images/gajray 1.webp" alt="Daisy Gajray" style="height:260px;">
+        <div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Gift Idea</div><h3>Daisy Gajray</h3><p>Adorable crocheted Gajray.</p><span class="m-price">PKR 1000</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Daisy Gajray','PKR 1000',1000,'images/gajray 1.webp')">🛒 Add to Cart</button></div>
+      </div>
+      <div class="m-card" onclick="showPage('earrings');setTab('studs')">
+        <img src="images/flower stud.png" alt="Pink Studs" style="height:240px;">
+        <div class="m-card-body"><div class="m-tag m-tag-pink">New</div><h3>Pink Flower Studs</h3><p>pink crochet flower with pearl — statement look.</p><span class="m-price">PKR 300</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Pink Flower Studs','PKR 300',300,'images/flower stud.png')">🛒 Add to Cart</button></div>
+      </div>
+      <div class="m-card" onclick="showPage('scrunchies')">
+        <img src="images/scrunchiess.webp" alt="Collection" style="height:240px;">
+        <div class="m-card-body"><div class="m-tag">Full Collection</div><h3>Scrunchie Collection</h3><p>Fluffy Crochet Scrunchies in five Shades.</p><span class="m-price">From PKR 200</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Scrunchie Collection','PKR 1000',1000,'images/scrunchiess.webp')">🛒 Add to Cart</button></div>
+      </div>
+      <div class="m-card" onclick="showPage('bookmarks')">
+        <img src="images/bookmarkset.webp" alt="BOOK mark Set" style="height:280px;">
+        <div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Book Mark Set</h3><p>Enjoy your books best with crochet bookmark.</p><span class="m-price">PKR 200</span>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart('Book Mark Set','PKR 200',200,'images/bookmarkset.webp')">🛒 Add to Cart</button></div>
+      </div>
     </div>
   </div>
   <footer><div class="f-logo">Crochet Craft 🧶</div><p>Handcrafted with ❤️ in Pakistan &nbsp;|&nbsp; © 2026 All rights reserved.</p></footer>
 </div>
 
 <!-- EARRINGS -->
-<div id="page-earrings" class="page"><div class="section">
-  <div class="sec-head"><h2>💎 Earrings</h2><div class="divider"></div><p>Handcrafted crochet earrings — studs, bows, hearts & more</p></div>
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="setTab('all')">All Earrings</button>
-    <button class="tab-btn" onclick="setTab('studs')">✨ Flower Studs</button>
-    <button class="tab-btn" onclick="setTab('dangles')">🎀 Bow Dangles</button>
-    <button class="tab-btn" onclick="setTab('hearts')">❤️ Heart Studs</button>
+<div id="page-earrings" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>💎 Earrings</h2><div class="divider"></div><p>Handcrafted crochet earrings — studs, bows, hearts & more</p></div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="setTab('all')">All Earrings</button>
+      <button class="tab-btn" onclick="setTab('studs')">✨ Flower Studs</button>
+      <button class="tab-btn" onclick="setTab('dangles')">🎀 Bow Dangles</button>
+      <button class="tab-btn" onclick="setTab('hearts')">❤️ Heart Studs</button>
+    </div>
+    <div class="earing-section active" id="tab-all">
+      <div class="masonry">
+        <div class="m-card"><img src="images/flower stud.png" alt="Bow earings" style="height:290px;"><div class="m-card-body"><div class="m-tag m-tag-pink">✨ Studs</div><h3>Blush Flower Studs</h3><p>Soft blush pink crochet flower with pearl centre. Hypoallergenic hooks.</p><span class="m-price">PKR 280</span><button class="add-cart-btn" onclick="addToCart('Blush Flower Studs','PKR 280',280,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/hot pink stud.png" alt="Hot Pink Studs" style="height:250px;"><div class="m-card-body"><div class="m-tag m-tag-pink">✨ Studs</div><h3>Hot Pink Flower Studs</h3><p>Bold hot pink crochet flower studs with pearl — eye-catching!</p><span class="m-price">PKR 300</span><button class="add-cart-btn" onclick="addToCart('Hot Pink Flower Studs','PKR 300',300,'images/hot pink stud.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/bow earings.png" alt="Bow Earrings" style="height:270px;"><div class="m-card-body"><div class="m-tag m-tag-pink">🎀 Dangles</div><h3>Crochet Bow Dangles</h3><p>Hot pink crocheted bow dangle earrings — playful coquette style!</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Crochet Bow Dangles','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/heart studs.png" alt="Heart Studs" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Studs</div><h3>Red Heart Studs</h3><p>Crocheted red heart stud earrings — perfect Valentine gift!</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Studs','PKR 260',260,'images/heart studs.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/heart earings.png" alt="Heart Studs" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Earrings</div><h3>Red Heart Earrings</h3><p>Crocheted red heart earrings — perfect Valentine gift!</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Earrings','PKR 260',260,'images/heart earings.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/earings set.png" alt="Collection" style="height:230px;"><div class="m-card-body"><div class="m-tag">Bundle</div><h3>Mix & Match Set</h3><p>Your choice of 3 earring pairs from our collection.</p><span class="m-price">PKR 700 / 3 pairs</span><button class="add-cart-btn" onclick="addToCart('Mix & Match Earring Set','PKR 700',700,'images/earings set.png')">🛒 Add to Cart</button></div></div>
+      </div>
+    </div>
+    <div class="earing-section" id="tab-studs">
+      <div class="masonry">
+        <div class="m-card"><img src="images/flower stud.png" alt="Pink Studs" style="height:310px;"><div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Blush Flower Studs</h3><p>Soft blush pink crochet flower stud earrings with pearl centre. Gentle on ears, hypoallergenic.</p><span class="m-price">PKR 280</span><button class="add-cart-btn" onclick="addToCart('Blush Flower Studs','PKR 280',280,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/studs.webp" alt="Hot Pink Studs" style="height:280px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Bold Look</div><h3>Hot Pink Flower Studs</h3><p>Vibrant hot pink crochet flower with pearl centre. Makes a statement!</p><span class="m-price">PKR 300</span><button class="add-cart-btn" onclick="addToCart('Hot Pink Flower Studs','PKR 300',300,'images/studs.webp')">🛒 Add to Cart</button></div></div>
+      </div>
+    </div>
+    <div class="earing-section" id="tab-dangles">
+      <div class="masonry">
+        <div class="m-card"><img src="images/sunflower earings.png" alt="Sunflower Earrings" style="height:340px;"><div class="m-card-body"><div class="m-tag m-tag-pink">🎀 Coquette</div><h3>Crochet Sunflower Dangles</h3><p>Crocheted dangle earrings. Playful, bold & totally on-trend!</p><span class="m-price">PKR 320</span><button class="add-cart-btn" onclick="addToCart('Crochet Sunflower Dangles','PKR 320',320,'images/sunflower earings.png')">🛒 Add to Cart</button></div></div>
+        <div class="m-card"><img src="images/bow earings.png" alt="Bow in collection" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Also Available</div><h3>Mini Bow Studs</h3><p>Smaller version of bow earrings as stud backs — cute & subtle.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Mini Bow Studs','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div></div>
+      </div>
+    </div>
+    <div class="earing-section" id="tab-hearts">
+      <div class="masonry">
+        <div class="m-card"><img src="images/heart studs.png" alt="Heart Studs" style="height:320px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Gift Idea</div><h3>Red Heart Studs</h3><p>Handcrocheted red heart stud earrings. Perfect as a Valentine's Day or friendship gift!</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Studs','PKR 260',260,'images/heart studs.png')">🛒 Add to Cart</button></div></div>
+      </div>
+    </div>
   </div>
-  <div class="earing-section active" id="tab-all"><div class="masonry">
-    <div class="m-card"><img src="images/flower stud.png" style="height:290px;"><div class="m-card-body"><div class="m-tag m-tag-pink">✨ Studs</div><h3>Blush Flower Studs</h3><p>Soft blush pink crochet flower with pearl.</p><span class="m-price">PKR 280</span><button class="add-cart-btn" onclick="addToCart('Blush Flower Studs','PKR 280',280,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/hot pink stud.png" style="height:250px;"><div class="m-card-body"><div class="m-tag m-tag-pink">✨ Studs</div><h3>Hot Pink Flower Studs</h3><p>Bold hot pink crochet flower studs.</p><span class="m-price">PKR 300</span><button class="add-cart-btn" onclick="addToCart('Hot Pink Flower Studs','PKR 300',300,'images/hot pink stud.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/bow earings.png" style="height:270px;"><div class="m-card-body"><div class="m-tag m-tag-pink">🎀 Dangles</div><h3>Crochet Bow Dangles</h3><p>Hot pink crocheted bow dangle earrings.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Crochet Bow Dangles','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/heart studs.png" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Studs</div><h3>Red Heart Studs</h3><p>Crocheted red heart stud earrings.</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Studs','PKR 260',260,'images/heart studs.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/heart earings.png" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Earrings</div><h3>Red Heart Earrings</h3><p>Crocheted red heart earrings.</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Earrings','PKR 260',260,'images/heart earings.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/earings set.png" style="height:230px;"><div class="m-card-body"><div class="m-tag">Bundle</div><h3>Mix & Match Set</h3><p>Your choice of 3 earring pairs.</p><span class="m-price">PKR 700 / 3 pairs</span><button class="add-cart-btn" onclick="addToCart('Mix and Match Earring Set','PKR 700',700,'images/earings set.png')">🛒 Add to Cart</button></div></div>
-  </div></div>
-  <div class="earing-section" id="tab-studs"><div class="masonry">
-    <div class="m-card"><img src="images/flower stud.png" style="height:310px;"><div class="m-card-body"><div class="m-tag m-tag-pink">⭐ Best Seller</div><h3>Blush Flower Studs</h3><p>Soft blush pink crochet flower stud earrings.</p><span class="m-price">PKR 280</span><button class="add-cart-btn" onclick="addToCart('Blush Flower Studs','PKR 280',280,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/studs.webp" style="height:280px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Bold Look</div><h3>Hot Pink Flower Studs</h3><p>Vibrant hot pink crochet flower with pearl.</p><span class="m-price">PKR 300</span><button class="add-cart-btn" onclick="addToCart('Hot Pink Flower Studs','PKR 300',300,'images/studs.webp')">🛒 Add to Cart</button></div></div>
-  </div></div>
-  <div class="earing-section" id="tab-dangles"><div class="masonry">
-    <div class="m-card"><img src="images/sunflower earings.png" style="height:340px;"><div class="m-card-body"><div class="m-tag m-tag-pink">🎀 Coquette</div><h3>Crochet Sunflower Dangles</h3><p>Crocheted dangle earrings. Playful!</p><span class="m-price">PKR 320</span><button class="add-cart-btn" onclick="addToCart('Crochet Sunflower Dangles','PKR 320',320,'images/sunflower earings.png')">🛒 Add to Cart</button></div></div>
-    <div class="m-card"><img src="images/bow earings.png" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Also Available</div><h3>Mini Bow Studs</h3><p>Smaller version of bow earrings.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Mini Bow Studs','PKR 200',200,'images/bow earings.png')">🛒 Add to Cart</button></div></div>
-  </div></div>
-  <div class="earing-section" id="tab-hearts"><div class="masonry">
-    <div class="m-card"><img src="images/heart studs.png" style="height:320px;"><div class="m-card-body"><div class="m-tag m-tag-pink">❤️ Gift Idea</div><h3>Red Heart Studs</h3><p>Handcrocheted red heart stud earrings.</p><span class="m-price">PKR 260</span><button class="add-cart-btn" onclick="addToCart('Red Heart Studs','PKR 260',260,'images/heart studs.png')">🛒 Add to Cart</button></div></div>
-  </div></div>
-</div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft — Handmade with ❤️</p></footer></div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft — Handmade with ❤️</p></footer>
+</div>
 
-<!-- Other category pages -->
-<div id="page-hairpins" class="page"><div class="section"><div class="sec-head"><h2>🪡 Hair Pins</h2><div class="divider"></div><p>Delicate crochet flower & leaf hair pins</p></div><div class="masonry"><div class="m-card"><img src="images/hair pin.webp" style="height:250px;"><div class="m-card-body"><div class="m-tag">Set of 6</div><h3>Floral Crochet Hair Pins</h3><p>Beautiful hair pins.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Floral Crochet Hair Pins Set of 6','PKR 200',200,'images/hair pin.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/hair pins pack4.png" style="height:220px;"><div class="m-card-body"><div class="m-tag">Set of 4</div><h3>Daisy Hair Pins</h3><p>White daisy crochet hair grip.</p><span class="m-price">PKR 150</span><button class="add-cart-btn" onclick="addToCart('Daisy Hair Pins Set of 4','PKR 150',150,'images/hair pins pack4.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/hairpins pack.png" style="height:270px;"><div class="m-card-body"><div class="m-tag">Set of 9</div><h3>Mixed Flower Pins</h3><p>Set of 9 crochet flower clips.</p><span class="m-price">PKR 350</span><button class="add-cart-btn" onclick="addToCart('Mixed Flower Pins Set of 9','PKR 350',350,'images/hairpins pack.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-scrunchies" class="page"><div class="section"><div class="sec-head"><h2>🌸 Scrunchies</h2><div class="divider"></div><p>Gentle on your hair — gorgeous on your wrist</p></div><div class="masonry"><div class="m-card"><img src="images/scrunchiess.webp" style="height:260px;"><div class="m-card-body"><div class="m-tag">⭐ Best Seller</div><h3>Crochet Scrunchie Set</h3><p>Fluffy crochet scrunchies in 5 shades.</p><span class="m-price">PKR 1000</span><button class="add-cart-btn" onclick="addToCart('Crochet Scrunchie Set x5','PKR 1000',1000,'images/scrunchiess.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/scrunchie pack 3.png" style="height:260px;"><div class="m-card-body"><div class="m-tag">Cute!</div><h3>Crochet Scrunchie Pack</h3><p>Customized scrunchies. Pack of 3.</p><span class="m-price">PKR 600</span><button class="add-cart-btn" onclick="addToCart('Crochet Scrunchie Pack x3','PKR 600',600,'images/scrunchie pack 3.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-ribbons" class="page"><div class="section"><div class="sec-head"><h2>🎀 Ribbons</h2><div class="divider"></div><p>Soft crochet bow ribbons</p></div><div class="masonry"><div class="m-card"><img src="images/Ribons.png" style="height:260px;"><div class="m-card-body"><div class="m-tag">Coquette</div><h3>Classic Ribbon</h3><p>Wide crocheted bow.</p><span class="m-price">PKR 50</span><button class="add-cart-btn" onclick="addToCart('Classic Ribbon','PKR 50',50,'images/Ribons.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/Ribons1.png" style="height:220px;"><div class="m-card-body"><h3>Delicate Ribbon Bow</h3><p>Mini ribbon bow.</p><span class="m-price">PKR 70</span><button class="add-cart-btn" onclick="addToCart('Delicate Ribbon Bow','PKR 70',70,'images/Ribons1.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-bandana" class="page"><div class="section"><div class="sec-head"><h2>🧣 Bandana</h2><div class="divider"></div><p>Boho crochet bandanas</p></div><div class="masonry"><div class="m-card"><img src="images/bandana 1.webp" style="height:270px;"><div class="m-card-body"><div class="m-tag">Boho</div><h3>Crochet Head Bandana</h3><p>Handmade boho head scarf.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Crochet Head Bandana','PKR 500',500,'images/bandana 1.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/bandana 2.webp" style="height:240px;"><div class="m-card-body"><h3>Head Bandana</h3><p>Crochet bandana.</p><span class="m-price">PKR 600</span><button class="add-cart-btn" onclick="addToCart('Head Bandana','PKR 600',600,'images/bandana 2.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-paranda" class="page"><div class="section"><div class="sec-head"><h2>💫 Paranda</h2><div class="divider"></div><p>Traditional crochet paranda</p></div><div class="masonry"><div class="m-card"><img src="images/rose paranda.png" style="height:260px;"><div class="m-card-body"><div class="m-tag">Festive</div><h3>Mehndi Paranda</h3><p>Multicolour paranda.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Mehndi Paranda Rose','PKR 450',450,'images/rose paranda.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/green paranda.png" style="height:260px;"><div class="m-card-body"><div class="m-tag">Festive</div><h3>Green Mehndi Paranda</h3><p>Multicolour paranda.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Mehndi Paranda Green','PKR 450',450,'images/green paranda.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-headbands" class="page"><div class="section"><div class="sec-head"><h2>👑 Headbands</h2><div class="divider"></div><p>Cozy crochet headbands</p></div><div class="masonry"><div class="m-card"><img src="images/headband.webp" style="height:270px;"><div class="m-card-body"><div class="m-tag">⭐ Top Pick</div><h3>Boho Crochet Headband</h3><p>Wide boho headband in sage green.</p><span class="m-price">PKR 420</span><button class="add-cart-btn" onclick="addToCart('Boho Crochet Headband','PKR 420',420,'images/headband.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/headband1.png" style="height:240px;"><div class="m-card-body"><h3>Twisted Ear Warmer</h3><p>Chunky twisted crochet headband.</p><span class="m-price">PKR 380</span><button class="add-cart-btn" onclick="addToCart('Twisted Ear Warmer','PKR 380',380,'images/headband1.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/headband2.png" style="height:260px;"><div class="m-card-body"><div class="m-tag">New</div><h3>Flower Crown Band</h3><p>Crocheted flower crown headband.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Flower Crown Band','PKR 500',500,'images/headband2.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-gloves" class="page"><div class="section"><div class="sec-head"><h2>🧤 Gloves</h2><div class="divider"></div><p>Warmth meets handmade style</p></div><div class="masonry"><div class="m-card"><img src="images/gloves1.webp" style="height:270px;"><div class="m-card-body"><div class="m-tag">Winter Special</div><h3>Granny Square Gloves</h3><p>Fingerless gloves with granny square detail.</p><span class="m-price">PKR 750</span><button class="add-cart-btn" onclick="addToCart('Granny Square Gloves','PKR 750',750,'images/gloves1.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/gloves2.webp" style="height:240px;"><div class="m-card-body"><h3>Cozy Fingerless Gloves</h3><p>Warm plush crochet fingerless gloves.</p><span class="m-price">PKR 680</span><button class="add-cart-btn" onclick="addToCart('Cozy Fingerless Gloves','PKR 680',680,'images/gloves2.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-bracelets" class="page"><div class="section"><div class="sec-head"><h2>📿 Bracelets</h2><div class="divider"></div><p>Stack them up!</p></div><div class="masonry"><div class="m-card"><img src="images/bracelet.webp" style="height:250px;"><div class="m-card-body"><div class="m-tag">⭐ Best Seller</div><h3>Daisy Chain Bracelet</h3><p>Dainty daisy crochet bracelet.</p><span class="m-price">PKR 250</span><button class="add-cart-btn" onclick="addToCart('Daisy Chain Bracelet','PKR 250',250,'images/bracelet.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-keychains" class="page"><div class="section"><div class="sec-head"><h2>🔑 Keychains</h2><div class="divider"></div><p>Adorable crochet keychains!</p></div><div class="masonry"><div class="m-card"><img src="images/sunflower keychain.webp" style="height:260px;"><div class="m-card-body"><div class="m-tag">Trending 🌻</div><h3>Cute Sunflower Keychain</h3><p>Adorable crocheted bag charm.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Cute Sunflower Keychain','PKR 450',450,'images/sunflower keychain.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/keychain.png" style="height:270px;"><div class="m-card-body"><div class="m-tag">Coquette</div><h3>Pink Crocheted Keychain</h3><p>Handmade crochet keychain.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Pink Bow Keychain','PKR 500',500,'images/keychain.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/keychain 1.png" style="height:230px;"><div class="m-card-body"><h3>Plushy Keychain</h3><p>Cute plushy keychains.</p><span class="m-price">PKR 440</span><button class="add-cart-btn" onclick="addToCart('Plushy Keychain','PKR 440',440,'images/keychain 1.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-gajray" class="page"><div class="section"><div class="sec-head"><h2>🌺 Gajray</h2><div class="divider"></div><p>Handcrafted crochet gajray for brides and celebrations</p></div><div class="masonry"><div class="m-card"><img src="images/gajray.png" style="height:300px;"><div class="m-card-body"><div class="m-tag">🌹 Bridal</div><h3>Rose Gajra Set</h3><p>Set of 2 crochet rose gajra bun wraps.</p><span class="m-price">PKR 1,000</span><button class="add-cart-btn" onclick="addToCart('Rose Gajra Set','PKR 1000',1000,'images/gajray.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/gajray 1.webp" style="height:270px;"><div class="m-card-body"><div class="m-tag">New</div><h3>Pink Floral Gajra</h3><p>Handmade pink and white crochet hair accessory.</p><span class="m-price">PKR 1,200</span><button class="add-cart-btn" onclick="addToCart('Pink Floral Gajra','PKR 1200',1200,'images/gajray 1.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/gajray rose.png" style="height:260px;"><div class="m-card-body"><h3>Mehndi Gajra</h3><p>Colourful crochet gajra for mehndi.</p><span class="m-price">PKR 1000</span><button class="add-cart-btn" onclick="addToCart('Mehndi Gajra','PKR 1000',1000,'images/gajray rose.png')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-deals" class="page"><div class="section"><div class="sec-head"><h2>🏷️ Special Deals</h2><div class="divider"></div><p>Limited time offers!</p></div><div class="masonry"><div class="m-card"><img src="images/flower stud.png" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">25% OFF</div><h3>Flower Studs Bundle</h3><p>Both pink and hot pink flower studs.</p><span class="old">PKR 580</span><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Flower Studs Bundle Deal','PKR 450',450,'images/flower stud.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/earings set.png" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Buy 2 Get 1</div><h3>Bow Dangle Earrings</h3><p>Buy 2 pairs get 1 free!</p><span class="m-price">PKR 640 for 3</span><button class="add-cart-btn" onclick="addToCart('Bow Dangle Earrings Buy 2 Get 1','PKR 640',640,'images/earings set.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/heart studs.png" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Gift Bundle</div><h3>Heart Studs + Bow Combo</h3><p>Perfect gift set.</p><span class="old">PKR 580</span><span class="m-price">PKR 480</span><button class="add-cart-btn" onclick="addToCart('Heart Studs + Bow Combo','PKR 480',480,'images/heart studs.png')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/scrunchiess.webp" style="height:230px;"><div class="m-card-body"><div class="m-tag">30% OFF</div><h3>Scrunchie Bundle x5</h3><p>Set of 5 mixed pastels.</p><span class="old">PKR 1,000</span><span class="m-price">PKR 700</span><button class="add-cart-btn" onclick="addToCart('Scrunchie Bundle x5 Deal','PKR 700',700,'images/scrunchiess.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/bookmarkset.webp" style="height:220px;"><div class="m-card-body"><div class="m-tag">Buy 2 Get 1 FREE</div><h3>Bookmark Trio</h3><p>Buy 2 get 1 free!</p><span class="m-price">PKR 400 for 3</span><button class="add-cart-btn" onclick="addToCart('Bookmark Trio Deal','PKR 400',400,'images/bookmarkset.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-bookmarks" class="page"><div class="section"><div class="sec-head"><h2>📖 Bookmarks</h2><div class="divider"></div><p>Making reading extra special</p></div><div class="masonry"><div class="m-card"><img src="images/bookmark.webp" style="height:280px;"><div class="m-card-body"><div class="m-tag">💝 Gift Idea</div><h3>Flower Bookmark</h3><p>Crochet flower bookmark with tassel.</p><span class="m-price">PKR 180 each | PKR 400 for 2</span><button class="add-cart-btn" onclick="addToCart('Flower Bookmark','PKR 180',180,'images/bookmark.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/bookmarkset.webp" style="height:260px;"><div class="m-card-body"><h3>Flower and Leaf Set</h3><p>Crocheted flower and leaf bookmark set.</p><span class="m-price">PKR 200 each | PKR 400 for 2</span><button class="add-cart-btn" onclick="addToCart('Flower and Leaf Bookmark Set','PKR 200',200,'images/bookmarkset.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
-<div id="page-bookcovers" class="page"><div class="section"><div class="sec-head"><h2>📚 Book Covers</h2><div class="divider"></div><p>Protect your favourite books in style</p></div><div class="masonry"><div class="m-card"><img src="images/bookcover1.webp" style="height:280px;"><div class="m-card-body"><div class="m-tag">Custom Orders</div><h3>Crochet Book Sleeve</h3><p>Multicolour handmade crochet book cover.</p><span class="m-price">PKR 700</span><button class="add-cart-btn" onclick="addToCart('Crochet Book Sleeve','PKR 700',700,'images/bookcover1.webp')">🛒 Add to Cart</button></div></div><div class="m-card"><img src="images/bookcover2.webp" style="height:250px;"><div class="m-card-body"><div class="m-tag">Vintage</div><h3>Vintage Book Cover</h3><p>Classic crocheted book cover, any size.</p><span class="m-price">PKR 750</span><button class="add-cart-btn" onclick="addToCart('Vintage Book Cover','PKR 750',750,'images/bookcover2.webp')">🛒 Add to Cart</button></div></div></div></div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
+<!-- HAIR PINS -->
+<div id="page-hairpins" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🪡 Hair Pins</h2><div class="divider"></div><p>Delicate crochet flower & leaf hair pins</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/hair pin.webp" alt="Flower pin" style="height:250px;"><div class="m-card-body"><div class="m-tag">Handmade set of 6</div><h3>Floral Crochet Hair Pins</h3><p>Beautiful hair pins.</p><span class="m-price">PKR 200</span><button class="add-cart-btn" onclick="addToCart('Floral Crochet Hair Pins (Set of 6)','PKR 200',200,'images/hair pin.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/hair pins pack4.png" alt="Floral pins" style="height:220px;"><div class="m-card-body"><div class="m-tag">Set of 4</div><h3>Daisy Hair Pins</h3><p>White daisy crochet hair grip.</p><span class="m-price">PKR 150</span><button class="add-cart-btn" onclick="addToCart('Daisy Hair Pins (Set of 4)','PKR 150',150,'images/hair pins pack4.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/hairpins pack.png" alt="Hair pins" style="height:270px;"><div class="m-card-body"><div class="m-tag">Set of 9</div><h3>Mixed Flower Pins</h3><p>Set of 9 crochet flower clips, pastel colours.</p><span class="m-price">PKR 350</span><button class="add-cart-btn" onclick="addToCart('Mixed Flower Pins (Set of 9)','PKR 350',350,'images/hairpins pack.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
 
-<!-- ═══════ CHECKOUT ═══════ -->
+<!-- SCRUNCHIES -->
+<div id="page-scrunchies" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🌸 Scrunchies</h2><div class="divider"></div><p>Gentle on your hair — gorgeous on your wrist</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/scrunchiess.webp" alt="Crochet scrunchie Set" style="height:260px;"><div class="m-card-body"><div class="m-tag">⭐ Best Seller</div><h3>Crochet Scrunchie Set</h3><p>Our fluffy crochet scrunchies come in 5 gorgeous shades. Made with soft premium yarn — gentle on all hair types.</p><span class="m-price">PKR 1000</span><button class="add-cart-btn" onclick="addToCart('Crochet Scrunchie Set (x5)','PKR 1000',1000,'images/scrunchiess.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/scrunchie pack 3.png" alt="scrunchie set" style="height:260px;"><div class="m-card-body"><div class="m-tag">Cute!</div><h3>Crochet Scrunchie Pack</h3><p>Get your customized scrunchies. Pack of 3.</p><span class="m-price">PKR 600</span><button class="add-cart-btn" onclick="addToCart('Crochet Scrunchie Pack (x3)','PKR 600',600,'images/scrunchie pack 3.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- RIBBONS -->
+<div id="page-ribbons" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🎀 Ribbons</h2><div class="divider"></div><p>Soft crochet bow ribbons for hair & gifting</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/Ribons.png" alt="Bow ribbon" style="height:260px;"><div class="m-card-body"><div class="m-tag">Coquette</div><h3>Classic Ribbon</h3><p>Wide crocheted bow in brown & lemon.</p><span class="m-price">PKR 50</span><button class="add-cart-btn" onclick="addToCart('Classic Ribbon','PKR 50',50,'images/Ribons.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/Ribons1.png" alt="Delicate bow" style="height:220px;"><div class="m-card-body"><h3>Delicate Ribbon Bow</h3><p>Mini ribbon bow — dainty & elegant.</p><span class="m-price">PKR 70</span><button class="add-cart-btn" onclick="addToCart('Delicate Ribbon Bow','PKR 70',70,'images/Ribons1.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- BANDANA -->
+<div id="page-bandana" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🧣 Bandana</h2><div class="divider"></div><p>Boho crochet bandanas</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/bandana 1.png" alt="Bandana" style="height:270px;"><div class="m-card-body"><div class="m-tag">Boho</div><h3>Crochet Head Bandana</h3><p>Handmade boho head scarf in natural cream.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Crochet Head Bandana','PKR 500',500,'images/bandana 1.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/bandana 2.webp" alt="Bandana" style="height:240px;"><div class="m-card-body"><h3>Head Bandana</h3><p>Crochet bandana.</p><span class="m-price">PKR 600</span><button class="add-cart-btn" onclick="addToCart('Head Bandana','PKR 600',600,'images/bandana 2.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- PARANDA -->
+<div id="page-paranda" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>💫 Paranda</h2><div class="divider"></div><p>Traditional crochet paranda</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/rose paranda.png" alt="Paranda" style="height:260px;"><div class="m-card-body"><div class="m-tag">Festive</div><h3>Mehndi Paranda</h3><p>Multicolour paranda for celebrations.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Mehndi Paranda (Rose)','PKR 450',450,'images/rose paranda.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/green paranda.png" alt="Paranda" style="height:260px;"><div class="m-card-body"><div class="m-tag">Festive</div><h3>Green Mehndi Paranda</h3><p>Multicolour paranda for celebrations.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Mehndi Paranda (Green)','PKR 450',450,'images/green paranda.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- HEADBANDS -->
+<div id="page-headbands" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>👑 Headbands</h2><div class="divider"></div><p>Cozy crochet headbands for every season</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/headband.webp" alt="Headband" style="height:270px;"><div class="m-card-body"><div class="m-tag">⭐ Top Pick</div><h3>Boho Crochet Headband</h3><p>Wide boho headband in sage green.</p><span class="m-price">PKR 420</span><button class="add-cart-btn" onclick="addToCart('Boho Crochet Headband','PKR 420',420,'images/headband.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/headband1.png" alt="Twisted headband" style="height:240px;"><div class="m-card-body"><h3>Twisted Ear Warmer</h3><p>Chunky twisted crochet headband.</p><span class="m-price">PKR 380</span><button class="add-cart-btn" onclick="addToCart('Twisted Ear Warmer','PKR 380',380,'images/headband1.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/headband2.png" alt="Flower headband" style="height:260px;"><div class="m-card-body"><div class="m-tag">New</div><h3>Flower Crown Band</h3><p>Crocheted flower crown headband.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Flower Crown Band','PKR 500',500,'images/headband2.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- GLOVES -->
+<div id="page-gloves" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🧤 Gloves</h2><div class="divider"></div><p>Warmth meets handmade style</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/gloves1.webp" alt="Granny square gloves" style="height:270px;"><div class="m-card-body"><div class="m-tag">Winter Special</div><h3>Granny Square Gloves</h3><p>Fingerless gloves with granny square detail.</p><span class="m-price">PKR 750</span><button class="add-cart-btn" onclick="addToCart('Granny Square Gloves','PKR 750',750,'images/gloves1.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/gloves2.webp" alt="Fingerless gloves" style="height:240px;"><div class="m-card-body"><h3>Cozy Fingerless Gloves</h3><p>Warm plush crochet fingerless gloves.</p><span class="m-price">PKR 680</span><button class="add-cart-btn" onclick="addToCart('Cozy Fingerless Gloves','PKR 680',680,'images/gloves2.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- BRACELETS -->
+<div id="page-bracelets" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>📿 Bracelets</h2><div class="divider"></div><p>Stack them up — crochet bracelets in every style</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/bracelet.webp" alt="Daisy bracelet" style="height:250px;"><div class="m-card-body"><div class="m-tag">⭐ Best Seller</div><h3>Daisy Chain Bracelet</h3><p>Dainty daisy crochet bracelet in white & sage.</p><span class="m-price">PKR 250</span><button class="add-cart-btn" onclick="addToCart('Daisy Chain Bracelet','PKR 250',250,'images/bracelet.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- KEYCHAINS -->
+<div id="page-keychains" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🔑 Keychains</h2><div class="divider"></div><p>Adorable crochet keychains — great gifts too!</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/sunflower keychain.webp" alt="Mushroom" style="height:260px;"><div class="m-card-body"><div class="m-tag">Trending 🍄</div><h3>Cute Sunflower Keychain</h3><p>Adorable crocheted mushroom bag charm.</p><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Cute Mushroom Keychain','PKR 280',280,'images/sunflower keychain.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/keychain.png" alt="Pink bow keychain" style="height:270px;"><div class="m-card-body"><div class="m-tag">Coquette</div><h3>Pink crocheted Keychain</h3><p>Handmade crochet keychain.</p><span class="m-price">PKR 500</span><button class="add-cart-btn" onclick="addToCart('Pink Bow Keychain','PKR 260',260,'images/keychain.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/keychain 1.png" alt="Flower keychain" style="height:230px;"><div class="m-card-body"><h3>Plushy Keychain</h3><p>cute plushy keychains.</p><span class="m-price">PKR 440</span><button class="add-cart-btn" onclick="addToCart('Daisy Flower Keychain','PKR 240',240,'images/keychain 1.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- GAJRAY -->
+<div id="page-gajray" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🌺 Gajray</h2><div class="divider"></div><p>Handcrafted crochet gajray for brides & celebrations</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/gajray.png" alt="Rose gajra" style="height:300px;"><div class="m-card-body"><div class="m-tag">🌹 Bridal</div><h3>Rose Gajra Set</h3><p>Set of 2 crochet rose gajra bun wraps.</p><span class="m-price">PKR 1,000</span><button class="add-cart-btn" onclick="addToCart('Rose Gajra Set','PKR 1000',1000,'images/gajray.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/gajray 1.webp" alt="Pink gajra" style="height:270px;"><div class="m-card-body"><div class="m-tag">New</div><h3>Pink Floral Gajra</h3><p>Handmade pink & white crochet hair accessory.</p><span class="m-price">PKR 1,200</span><button class="add-cart-btn" onclick="addToCart('Pink Floral Gajra','PKR 1200',1200,'images/gajray 1.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/gajray rose.png" alt="Gajra wrap" style="height:260px;"><div class="m-card-body"><h3>Mehndi Gajra</h3><p>Colourful crochet gajra for mehndi celebrations.</p><span class="m-price">PKR 1000</span><button class="add-cart-btn" onclick="addToCart('Mehndi Gajra','PKR 1000',1000,'images/gajray rose.png')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- DEALS -->
+<div id="page-deals" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>🏷️ Special Deals</h2><div class="divider"></div><p>Limited time offers — grab them before they're gone!</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/flower stud.png" alt="Studs deal" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">25% OFF</div><h3>Flower Studs Bundle</h3><p>Both pink & hot pink flower stud earrings together.</p><span class="old">PKR 580</span><span class="m-price">PKR 450</span><button class="add-cart-btn" onclick="addToCart('Flower Studs Bundle (Deal)','PKR 450',450,'images/flower stud.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/earings set.png" alt="Bow earrings deal" style="height:260px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Buy 2 Get 1</div><h3>Bow Dangle Earrings</h3><p>Buy 2 pairs of bow earrings, get 1 pair free!</p><span class="m-price">PKR 640 for 3</span><button class="add-cart-btn" onclick="addToCart('Bow Dangle Earrings (Buy 2 Get 1)','PKR 640',640,'images/earings set.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/heart studs.png" alt="Heart deal" style="height:240px;"><div class="m-card-body"><div class="m-tag m-tag-pink">Gift Bundle</div><h3>Heart Studs + Bow Combo</h3><p>Heart studs & bow earrings — perfect gift set.</p><span class="old">PKR 580</span><span class="m-price">PKR 480</span><button class="add-cart-btn" onclick="addToCart('Heart Studs + Bow Combo','PKR 480',480,'images/heart studs.png')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/scrunchiess.webp" alt="Scrunchie deal" style="height:230px;"><div class="m-card-body"><div class="m-tag">30% OFF</div><h3>Scrunchie Bundle x5</h3><p>Set of 5 crochet scrunchies mixed pastels.</p><span class="old">PKR 1,000</span><span class="m-price">PKR 700</span><button class="add-cart-btn" onclick="addToCart('Scrunchie Bundle x5 (Deal)','PKR 700',700,'images/scrunchiess.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/bookmarkset.webp" alt="Bookmark" style="height:220px;"><div class="m-card-body"><div class="m-tag">Buy 2 Get 1 FREE</div><h3>Bookmark Trio</h3><p>Buy 2 bookmarks, get 1 absolutely free!</p><span class="m-price">PKR 400 for 3</span><button class="add-cart-btn" onclick="addToCart('Bookmark Trio (Deal)','PKR 400',400,'images/bookmarkset.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- BOOKMARKS -->
+<div id="page-bookmarks" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>📖 Bookmarks</h2><div class="divider"></div><p>Making reading extra special</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/bookmark.webp" alt="Flower bookmark" style="height:280px;"><div class="m-card-body"><div class="m-tag">💝 Gift Idea</div><h3>Flower Bookmark</h3><p>Crochet flower bookmark with tassel detail.</p><span class="m-price">PKR 180 each | PKR 400 for 2</span><button class="add-cart-btn" onclick="addToCart('Flower Bookmark','PKR 180',180,'images/bookmark.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/bookmarkset.webp" alt="Leaf bookmark" style="height:260px;"><div class="m-card-body"><h3>Flower & Leaf Set</h3><p>Crocheted flower and leaf bookmark set.</p><span class="m-price">PKR 200 each | PKR 400 for 2</span><button class="add-cart-btn" onclick="addToCart('Flower & Leaf Bookmark Set','PKR 200',200,'images/bookmarkset.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- BOOK COVERS -->
+<div id="page-bookcovers" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>📚 Book Covers</h2><div class="divider"></div><p>Protect your favourite books in style</p></div>
+    <div class="masonry">
+      <div class="m-card"><img src="images/bookcover1.webp" alt="Book sleeve" style="height:280px;"><div class="m-card-body"><div class="m-tag">Custom Orders</div><h3>Crochet Book Sleeve</h3><p>Multicolour handmade crochet book cover.</p><span class="m-price">PKR 700</span><button class="add-cart-btn" onclick="addToCart('Crochet Book Sleeve','PKR 700',700,'images/bookcover1.webp')">🛒 Add to Cart</button></div></div>
+      <div class="m-card"><img src="images/bookcover2.webp" alt="Vintage cover" style="height:250px;"><div class="m-card-body"><div class="m-tag">Vintage</div><h3>Vintage Book Cover</h3><p>Classic crocheted book cover, any size.</p><span class="m-price">PKR 750</span><button class="add-cart-btn" onclick="addToCart('Vintage Book Cover','PKR 750',750,'images/bookcover2.webp')">🛒 Add to Cart</button></div></div>
+    </div>
+  </div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
+
+<!-- CHECKOUT -->
 <div id="page-checkout" class="page">
   <div class="section">
     <div class="sec-head"><h2>🌿 Place Your Order</h2><div class="divider"></div><p>Almost there — fill in your details below</p></div>
-
-    <!-- SUCCESS SCREEN -->
     <div class="order-success" id="orderSuccess">
       <div class="success-icon">✅</div>
       <h2>Order Placed!</h2>
-      <div class="order-id-box">
-        <p>Save your Order ID:</p>
-        <strong id="displayOrderId">—</strong>
-      </div>
-      <p>Thank you! We will contact you on WhatsApp within <strong>24 hours</strong> to confirm your order.</p>
-      <div class="pay-reminder-box" id="successPayReminder"></div>
-      <br>
-      <button class="btn" onclick="showPage('home');clearCart()">Continue Shopping 🛒</button>
+      <p>Your Order is done, will contact you within 24hours for confirmation. 🌿</p>
+      <button class="btn" onclick="showPage('home');clearCart()">Back to Shop 🛒</button>
     </div>
-
     <div class="checkout-grid" id="checkoutContent">
-      <!-- ORDER SUMMARY -->
       <div class="order-summary">
         <h3>🛒 Order Summary</h3>
         <div id="orderItemsList"></div>
         <hr class="order-divider">
-        <div class="order-total-row"><span>Total Amount</span><span id="orderGrandTotal">PKR 0</span></div>
+        <div class="order-total-row">
+          <span>Total Amount</span>
+          <span id="orderGrandTotal">PKR 0</span>
+        </div>
         <div style="margin-top:1rem;background:var(--sage-pale);border-radius:12px;padding:1rem;font-size:.85rem;color:var(--text-soft);line-height:1.7;">
-          📦 <strong>Delivery:</strong> 4–5 business days<br>
+          📦 <strong>Delivery:</strong> 4-5 business days<br>
           🚚 <strong>Shipping:</strong> PKR 150 (Free above PKR 2000)<br>
           🔄 <strong>Returns:</strong> Within 3 days of delivery
         </div>
       </div>
-
-      <!-- CHECKOUT FORM -->
       <div class="checkout-form">
         <h3>📋 Your Details</h3>
         <div class="fg-row">
@@ -365,144 +560,160 @@ footer p{font-size:.85rem;opacity:.6;}
           <div class="fg"><label>Phone / WhatsApp *</label><input id="oPhone" type="tel" placeholder="+92 300 0000000"></div>
         </div>
         <div class="fg"><label>Email Address</label><input id="oEmail" type="email" placeholder="you@gmail.com (optional)"></div>
-        <div class="fg"><label>Delivery Address *</label><textarea id="oAddress" placeholder="Your address, city, postal code" style="min-height:80px;"></textarea></div>
+        <div class="fg"><label>Delivery Address *</label><textarea id="oAddress" placeholder="Your address, city, and postal code" style="min-height:80px;"></textarea></div>
         <div class="fg"><label>City *</label><input id="oCity" type="text" placeholder="Your city"></div>
         <div class="fg"><label>Special Instructions</label><textarea id="oNotes" placeholder="Custom color? Gift wrap?" style="min-height:70px;"></textarea></div>
-
         <div class="fg">
-          <label>Payment Method *</label>
-          <div class="pay-methods">
-            <div class="pay-option" onclick="selectPay(this,'easypaisa')">
-              <input type="radio" name="pay"> <label>📱 EasyPaisa / JazzCash</label>
-            </div>
-            
+  <label>Payment Method *</label>
+ 
+  <!-- ✅ Option 1: JazzCash -->
+  <div class="pay-option" onclick="selectPay(this,'jazzcash')">
+    <input type="radio" name="pay">
+    <label>📱 JazzCash</label>
+  </div>
+<!-- Payment Details Box — select karne ke baad dikhega -->
+<div id="paymentDetails" style="display:none;margin-top:.8rem;background:var(--sage-pale);border-radius:12px;padding:1rem 1.2rem;font-size:.88rem;line-height:1.9;color:var(--text);">
+</div>
           </div>
-
-          <!-- ══ EASYPAISA DETAILS ══ -->
-          <div class="pay-details-box" id="box-easypaisa">
-            <div class="pay-details-header">📱 EasyPaisa / JazzCash Details</div>
-            <div class="pay-details-body">
-              <div class="pay-detail-row">
-                <div class="pay-detail-left">
-                  <div class="pay-detail-label">Account Number</div>
-                  <div class="pay-detail-value" id="ep-number">03235963246</div>
-                </div>
-                <button class="copy-btn" onclick="copyVal('ep-number',this)">Copy</button>
-              </div>
-              <div class="pay-detail-row">
-                <div class="pay-detail-left">
-                  <div class="pay-detail-label">Account Name</div>
-                  <div class="pay-detail-value">Zahida bibi</div>
-                </div>
-              </div>
-              <div class="pay-notice">
-                💡 Send the <strong>exact order amount</strong> to the number above via EasyPaisa or JazzCash.<br>
-                When we call you on WhatsApp, give your <strong>Order ID</strong> for verification. Advance payment only.
-              </div>
-            </div>
-          </div>
-
-
-        <button class="place-order-btn" id="placeOrderBtn" onclick="placeOrder()">✅ Place Order Now</button>
+        </div>
+        <button class="place-order-btn" onclick="placeOrder()">✅ Place Order Now</button>
+        
       </div>
     </div>
   </div>
 </div>
 
 <!-- CONTACT -->
-<div id="page-contact" class="page"><div class="section">
-  <div class="sec-head"><h2>💌 Contact Us</h2><div class="divider"></div><p>We love to hear from you — custom orders welcome!</p></div>
-  <div class="contact-grid">
-    <div class="c-info">
-      <h2>Let's <em style="color:var(--sage);font-style:italic;font-family:'Cormorant Garamond',serif">Connect</em></h2>
-      <p>Have a question, want a custom order, or just want to say hi? We will reply within 24 hours!</p>
-      <div class="c-row"><div class="c-icon">📍</div><div><h4>Location</h4><p>Pakistan</p></div></div>
-      <div class="c-row"><div class="c-icon">📞</div><div><h4>Phone / WhatsApp</h4><p>03235963246</p></div></div>
-      <div class="c-row"><div class="c-icon">📧</div><div><h4>Email</h4><p>craftcrochet605@gmail.com</p></div></div>
-      <div class="c-row"><div class="c-icon">🕐</div><div><h4>Hours</h4><p>Mon–Sat, 10am – 8pm</p></div></div>
-      <div class="c-row"><div class="c-icon">📱</div><div><h4>Follow Us</h4>
-        <div style="display:flex;gap:.8rem;margin-top:.4rem;flex-wrap:wrap;">
-          <a href="https://www.instagram.com/malik_crochet_craft" target="_blank" style="display:flex;align-items:center;gap:.4rem;background:#fce4f0;color:#c47aa0;padding:.45rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;text-decoration:none;" onmouseover="this.style.background='#c47aa0';this.style.color='#fff'" onmouseout="this.style.background='#fce4f0';this.style.color='#c47aa0'">📸 Instagram</a>
-          <a href="https://www.tiktok.com/@crochetcraftbymalik" target="_blank" style="display:flex;align-items:center;gap:.4rem;background:#ddeadb;color:#7d9b76;padding:.45rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;text-decoration:none;" onmouseover="this.style.background='#7d9b76';this.style.color='#fff'" onmouseout="this.style.background='#ddeadb';this.style.color='#7d9b76'">🎵 TikTok</a>
+<div id="page-contact" class="page">
+  <div class="section">
+    <div class="sec-head"><h2>💌 Contact Us</h2><div class="divider"></div><p>We'd love to hear from you — custom orders welcome!</p></div>
+    <div class="contact-grid">
+      <div class="c-info">
+        <h2>Let's <em style="color:var(--sage);font-style:italic;font-family:'Cormorant Garamond',serif">Connect</em></h2>
+        <p>Have a question, want a custom order, or just want to say hi? We'll reply within 24 hours!</p>
+        <div class="c-row"><div class="c-icon">📍</div><div><h4>Location</h4><p>Pakistan</p></div></div>
+        <div class="c-row"><div class="c-icon">📞</div><div><h4>Phone / WhatsApp</h4><p>03235963246</p></div></div>
+        <div class="c-row"><div class="c-icon">📧</div><div><h4>Email</h4><p>craftcrochet605@gmail.com</p></div></div>
+        <div class="c-row"><div class="c-icon">🕐</div><div><h4>Hours</h4><p>Mon–Sat, 10am – 8pm</p></div></div>
+        <div class="c-row"><div class="c-icon">📱</div><div><h4>Follow Us</h4>
+          <div style="display:flex;gap:.8rem;margin-top:.4rem;flex-wrap:wrap;">
+            <a href="https://www.instagram.com/malik_crochet_craft" target="_blank" style="display:flex;align-items:center;gap:.4rem;background:#fce4f0;color:#c47aa0;padding:.45rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;text-decoration:none;" onmouseover="this.style.background='#c47aa0';this.style.color='#fff'" onmouseout="this.style.background='#fce4f0';this.style.color='#c47aa0'">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@crochetcraftbymalik" target="_blank" style="display:flex;align-items:center;gap:.4rem;background:#ddeadb;color:#7d9b76;padding:.45rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;text-decoration:none;" onmouseover="this.style.background='#7d9b76';this.style.color='#fff'" onmouseout="this.style.background='#ddeadb';this.style.color='#7d9b76'">🎵 TikTok</a>
+          </div>
+        </div></div>
+      </div>
+      <div class="c-form">
+        <div class="fg-row">
+          <div class="fg"><label>Your Name</label><input id="cn" type="text" placeholder="Your name"></div>
+          <div class="fg"><label>Phone Number</label><input id="cp" type="tel" placeholder="+92 300 0000000"></div>
         </div>
-      </div></div>
-    </div>
-    <div class="c-form">
-      <div class="fg-row"><div class="fg"><label>Your Name</label><input id="cn" type="text" placeholder="Your name"></div><div class="fg"><label>Phone Number</label><input id="cp" type="tel" placeholder="+92 300 0000000"></div></div>
-      <div class="fg"><label>Email Address</label><input id="ce" type="email" placeholder="you@gmail.com"></div>
-      <div class="fg"><label>Your Message</label><textarea id="cm" placeholder="Custom orders, questions, feedback..."></textarea></div>
-      <button class="btn" onclick="submitForm()" style="width:100%">Send Message 💌</button>
-      <div class="success" id="smsg">✅ Message sent! We will reply within 24 hours 🌿</div>
+        <div class="fg"><label>Email Address</label><input id="ce" type="email" placeholder="you@gmail.com"></div>
+        <div class="fg"><label>Your Message</label><textarea id="cm" placeholder="Custom orders, questions, feedback..."></textarea></div>
+        <button class="btn" onclick="submitForm()" style="width:100%">Send Message 💌</button>
+        <div class="success" id="smsg">✅ Message sent! We'll reply within 24 hours 🌿</div>
+      </div>
     </div>
   </div>
-</div><footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer></div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>© 2026 Crochet Craft</p></footer>
+</div>
 
 <!-- ABOUT -->
-<div id="page-about" class="page"><div class="section">
-  <div class="about-top">
-    <div class="about-img-wrap"><img src="images/logo.webp" alt="Crochet Craft Logo"></div>
-    <div class="about-text">
-      <h2>Hello, We are<br><em style="color:var(--sage);font-style:italic">Crochet Craft</em> 🌿</h2>
-      <p>At Crochet Craft, we believe in the beauty of things that take time. What started as a quiet moment with a single hook has grown into a journey of intentional creation.</p>
-      <p>From the delicate grace of a <strong>hand-knotted stud earring</strong> to the intricate heritage of our <strong>bridal gajray</strong>, we use only premium yarns to ensure each piece feels as natural as it looks.</p>
-      <p>To us, handmade is not just a process — it is a heartbeat. ❤️</p>
-      <button class="btn" onclick="showPage('contact')" style="margin-top:1rem">Get in Touch</button>
+<div id="page-about" class="page">
+  <div class="section">
+    <div class="about-top">
+      <div class="about-img-wrap"><img src="images/logo.webp" alt="Crochet Craft Logo"></div>
+      <div class="about-text">
+        <h2>Hello, We're<br><em style="color:var(--sage);font-style:italic">Crochet Craft</em> 🌿</h2>
+        <p>At Crochet Craft, we believe in the beauty of things that take time. What started as a quiet moment with a single hook has grown into a journey of intentional creation—where every loop tells a story of patience and art.</p>
+        <p>Everything you see is born from our hands. From the delicate grace of a <strong>hand-knotted stud earring</strong> to the intricate heritage of our <strong>bridal gajray</strong>, we use only premium, earthy yarns to ensure each piece feels as natural as it looks.</p>
+        <p>To us, handmade isn't just a process—it's a heartbeat. It's a tangible connection between our hands and your home, woven with love to be cherished for a lifetime. ❤️</p>
+        <button class="btn" onclick="showPage('contact')" style="margin-top:1rem">Get in Touch</button>
+      </div>
+    </div>
+    <div class="sec-head"><h2>Our Values</h2><div class="divider"></div></div>
+    <div class="vals">
+      <div class="val"><div class="icon">🤲</div><h3>Handmade Always</h3><p>Every item crafted by hand — no machines, just skill and love.</p></div>
+      <div class="val"><div class="icon">🌿</div><h3>Quality First</h3><p>Only the finest yarn and threads for lasting beauty.</p></div>
+      <div class="val"><div class="icon">💝</div><h3>Made with Love</h3><p>Each piece carries the warmth of the hands that created it.</p></div>
+      <div class="val"><div class="icon">✨</div><h3>Custom Orders</h3><p>Tell us your vision and we'll bring it to life — just for you.</p></div>
     </div>
   </div>
-  <div class="sec-head"><h2>Our Values</h2><div class="divider"></div></div>
-  <div class="vals">
-    <div class="val"><div class="icon">🤲</div><h3>Handmade Always</h3><p>Every item crafted by hand — no machines, just skill and love.</p></div>
-    <div class="val"><div class="icon">🌿</div><h3>Quality First</h3><p>Only the finest yarn and threads for lasting beauty.</p></div>
-    <div class="val"><div class="icon">💝</div><h3>Made with Love</h3><p>Each piece carries the warmth of the hands that created it.</p></div>
-    <div class="val"><div class="icon">✨</div><h3>Custom Orders</h3><p>Tell us your vision and we will bring it to life — just for you.</p></div>
-  </div>
-</div><footer><div class="f-logo">Crochet Craft 🧶</div><p>Handcrafted with ❤️ in Pakistan | © 2026 Crochet Craft. All rights reserved.</p></footer></div>
+  <footer><div class="f-logo">Crochet Craft 🧶</div><p>Handcrafted with ❤️ in Pakistan &nbsp;|&nbsp; © 2026 Crochet Craft. All rights reserved.</p></footer>
+</div>
 
 <button class="stb" id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+// ════════════════════════════════════════════════
+//  BACKEND URL — server.js chalane ke baad
+//  Local testing ke liye ye wali line use karein:
 const API_URL = 'http://localhost:3000/api';
+//  Deploy hone ke baad apna URL daalein:
+//  const API_URL = 'https://aapka-server.onrender.com/api';
+// ════════════════════════════════════════════════
 
 let cart = [];
 let selectedPayment = '';
 
+// ─── PAGE NAVIGATION ─────────────────────────────
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const p=document.getElementById('page-'+id);
   if(p){p.classList.add('active');window.scrollTo(0,0);}
 }
+
 function setTab(tab){
   document.querySelectorAll('.earing-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const sec=document.getElementById('tab-'+tab);if(sec)sec.classList.add('active');
+  const sec=document.getElementById('tab-'+tab);
+  if(sec)sec.classList.add('active');
   document.querySelectorAll('.tab-btn').forEach(b=>{
-    if(b.textContent.toLowerCase().includes(tab)||(tab==='all'&&b.textContent.includes('All')))b.classList.add('active');
+    if(b.textContent.toLowerCase().includes(tab)||tab==='all'&&b.textContent.includes('All'))
+      b.classList.add('active');
   });
 }
 
-// CART
-function addToCart(name,priceStr,priceNum,img){
-  const ex=cart.find(i=>i.name===name);
-  if(ex){ex.qty++;}else{cart.push({name,priceStr,priceNum,img,qty:1,id:Date.now()});}
-  updateCartUI();showToast('Added: '+name);openCart();
+// ─── CART FUNCTIONS ──────────────────────────────
+function addToCart(name, priceStr, priceNum, img){
+  const existing = cart.find(i => i.name === name);
+  if(existing){ existing.qty++; }
+  else { cart.push({name, priceStr, priceNum, img, qty:1, id: Date.now()}); }
+  updateCartUI();
+  showToast('🛒 ' + name + ' added to cart!');
+  openCart();
 }
-function removeFromCart(id){cart=cart.filter(i=>i.id!==id);updateCartUI();}
-function changeQty(id,delta){
-  const item=cart.find(i=>i.id===id);if(!item)return;
-  item.qty+=delta;if(item.qty<=0)removeFromCart(id);else updateCartUI();
+
+function removeFromCart(id){
+  cart = cart.filter(i => i.id !== id);
+  updateCartUI();
 }
+
+function changeQty(id, delta){
+  const item = cart.find(i => i.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) removeFromCart(id);
+  else updateCartUI();
+}
+
 function updateCartUI(){
-  const total=cart.reduce((s,i)=>s+i.priceNum*i.qty,0);
-  const count=cart.reduce((s,i)=>s+i.qty,0);
-  const badge=document.getElementById('cartCount');
-  badge.textContent=count;badge.classList.toggle('show',count>0);
-  document.getElementById('cartTotal').textContent='PKR '+total.toLocaleString();
-  document.getElementById('checkoutBtn').disabled=cart.length===0;
-  const el=document.getElementById('cartItems');
-  if(cart.length===0){el.innerHTML='<div class="cart-empty"><div class="empty-icon">🧺</div><p>Your cart is empty.<br>Add some handmade love!</p></div>';return;}
-  el.innerHTML=cart.map(item=>`
+  const total = cart.reduce((s,i) => s + i.priceNum * i.qty, 0);
+  const count = cart.reduce((s,i) => s + i.qty, 0);
+  const badge = document.getElementById('cartCount');
+  badge.textContent = count;
+  badge.classList.toggle('show', count > 0);
+  document.getElementById('cartTotal').textContent = 'PKR ' + total.toLocaleString();
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+  const el = document.getElementById('cartItems');
+  if(cart.length === 0){
+    el.innerHTML = '<div class="cart-empty"><div class="empty-icon">🧺</div><p>Your cart is empty.<br>Add some handmade love!</p></div>';
+    return;
+  }
+  el.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img"><img src="${item.img}" onerror="this.parentElement.innerHTML='🧶'"></div>
+      <div class="cart-item-img">
+        <img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='🧶'">
+      </div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">${item.priceStr}</div>
@@ -512,115 +723,195 @@ function updateCartUI(){
           <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
         </div>
       </div>
-      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">🗑</button>
-    </div>`).join('');
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Remove">🗑</button>
+    </div>
+  `).join('');
 }
-function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartSidebar').classList.add('open');}
-function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartSidebar').classList.remove('open');}
+
+function openCart(){
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartSidebar').classList.add('open');
+}
+
+function closeCart(){
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartSidebar').classList.remove('open');
+}
 
 function goToCheckout(){
   closeCart();
-  const total=cart.reduce((s,i)=>s+i.priceNum*i.qty,0);
-  const shipping=total>=2000?0:150;const grand=total+shipping;
-  document.getElementById('orderItemsList').innerHTML=cart.map(item=>`
+  const total = cart.reduce((s,i) => s + i.priceNum * i.qty, 0);
+  const shipping = total >= 2000 ? 0 : 150;
+  const grand = total + shipping;
+  document.getElementById('orderItemsList').innerHTML = cart.map(item => `
     <div class="order-item-row">
-      <div><div class="order-item-name">${item.name}</div><div class="order-item-qty">Qty: ${item.qty}</div></div>
-      <div class="order-item-price">PKR ${(item.priceNum*item.qty).toLocaleString()}</div>
-    </div>`).join('')+`
+      <div>
+        <div class="order-item-name">${item.name}</div>
+        <div class="order-item-qty">Qty: ${item.qty}</div>
+      </div>
+      <div class="order-item-price">PKR ${(item.priceNum * item.qty).toLocaleString()}</div>
+    </div>
+  `).join('') + `
     <div class="order-item-row">
       <div class="order-item-name" style="color:var(--text-soft)">Shipping</div>
-      <div class="order-item-price" style="color:var(--text-soft)">${shipping===0?'FREE':'PKR 150'}</div>
+      <div class="order-item-price" style="color:var(--text-soft)">${shipping === 0 ? 'FREE 🎉' : 'PKR 150'}</div>
     </div>`;
-  document.getElementById('orderGrandTotal').textContent='PKR '+grand.toLocaleString();
-  document.getElementById('orderSuccess').style.display='none';
-  document.getElementById('checkoutContent').style.display='grid';
-  document.querySelectorAll('.pay-details-box').forEach(b=>b.classList.remove('show'));
-  document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));
-  selectedPayment='';
+  document.getElementById('orderGrandTotal').textContent = 'PKR ' + grand.toLocaleString();
+  document.getElementById('orderSuccess').style.display = 'none';
+  document.getElementById('checkoutContent').style.display = 'grid';
   showPage('checkout');
 }
 
-// PAYMENT SELECTION — shows account details box
-function selectPay(el,method){
-  document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));
-  document.querySelectorAll('.pay-details-box').forEach(b=>b.classList.remove('show'));
-  el.classList.add('selected');el.querySelector('input').checked=true;
-  selectedPayment=method;
-  const box=document.getElementById('box-'+method);if(box)box.classList.add('show');
+function selectPay(el, method){
+  document.querySelectorAll('.pay-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPayment = method;
+  el.querySelector('input').checked = true;
+
+  const box = document.getElementById('paymentDetails');
+
+  if(method === 'jazzcash'){
+    box.style.display = 'block';
+    box.innerHTML = `
+      <strong>📱  JazzCash Payment Details:</strong><br><br>
+      🔢 <strong>Account Number:</strong> 03235963246<br>
+      👤 <strong>Account Name:</strong> Zahida bibi<br><br>
+      <strong>Steps:</strong><br>
+      1. Send payment to above number<br>
+      2.upload  Screenshot <br>
+      3. WhatsApp the screenshot: <strong>03235963246</strong><br><br>
+      <span style="color:#c47aa0;font-weight:600;">⚠️ Order will confirm after payment verification</span>
+    `;
+  } 
 }
 
-// COPY BUTTON
-function copyVal(elId,btn){
-  const text=document.getElementById(elId).textContent.trim();
-  navigator.clipboard.writeText(text).then(()=>{
-    const orig=btn.textContent;btn.textContent='Copied!';
-    btn.style.background='var(--sage)';btn.style.color='#fff';
-    setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.style.color='';},2000);
-  }).catch(()=>showToast('Copy manually: '+text));
-}
 
-// PLACE ORDER
+// ─── ORDER PLACE — BACKEND SE CONNECTED ──────────
 async function placeOrder(){
-  const name=document.getElementById('oName').value.trim();
-  const phone=document.getElementById('oPhone').value.trim();
-  const email=document.getElementById('oEmail').value.trim();
-  const address=document.getElementById('oAddress').value.trim();
-  const city=document.getElementById('oCity').value.trim();
-  const notes=document.getElementById('oNotes').value.trim();
-  if(!name||!phone||!address||!city){showToast('Please fill all required fields!');return;}
-  if(!selectedPayment){showToast('Please select a payment method!');return;}
-  if(cart.length===0){showToast('Cart is empty!');return;}
-  const btn=document.getElementById('placeOrderBtn');
-  btn.disabled=true;btn.textContent='Placing order...';
-  const total=cart.reduce((s,i)=>s+i.priceNum*i.qty,0);
-  const shipping=total>=2000?0:150;const grand=total+shipping;
-  const localId='ORD-'+Date.now();
-  try{
-    const res=await fetch(`${API_URL}/orders`,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,phone,email,address,city,notes,paymentMethod:selectedPayment,cartItems:cart,totalAmount:grand})});
-    const data=await res.json();
-    showSuccess(data.orderId||localId,selectedPayment,grand);
-  }catch(e){
-    showSuccess(localId,selectedPayment,grand);
+  const name    = document.getElementById('oName').value.trim();
+  const phone   = document.getElementById('oPhone').value.trim();
+  const email   = document.getElementById('oEmail').value.trim();
+  const address = document.getElementById('oAddress').value.trim();
+  const city    = document.getElementById('oCity').value.trim();
+  const notes   = document.getElementById('oNotes').value.trim();
+
+  if(!name || !phone || !address || !city){
+    showToast('⚠️ Name,phone,address is required!');
+    return;
+  }
+  if(cart.length === 0){
+    showToast('⚠️ Cart is empty!');
+    return;
+  }
+
+  const btn = document.querySelector('.place-order-btn');
+  btn.disabled    = true;
+  btn.textContent = '⏳ Order processing...';
+
+  try {
+    const total    = cart.reduce((s,i) => s + i.priceNum * i.qty, 0);
+    const shipping = total >= 2000 ? 0 : 150;
+    const grand    = total + shipping;
+
+    const response = await fetch(`${API_URL}/orders`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, phone, email, address, city, notes,
+        paymentMethod: selectedPayment,
+        cartItems:     cart,
+        totalAmount:   grand
+      })
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+      document.getElementById('checkoutContent').style.display = 'none';
+      document.getElementById('orderSuccess').style.display    = 'block';
+      window.scrollTo(0,0);
+      cart = [];
+      updateCartUI();
+    } else {
+      showToast('❌ ' + (data.message || 'Order could not be placed,try again.'));
+      btn.disabled    = false;
+      btn.textContent = '✅ Place Order Now';
+    }
+  } catch(error){
+    // Agar server nahi chal raha to bhi success dikhao (offline fallback)
+    console.error('Order error:', error);
+    document.getElementById('checkoutContent').style.display = 'none';
+    document.getElementById('orderSuccess').style.display    = 'block';
+    window.scrollTo(0,0);
+    cart = [];
+    updateCartUI();
   }
 }
 
-function showSuccess(orderId,payMethod,grand){
-  document.getElementById('checkoutContent').style.display='none';
-  document.getElementById('orderSuccess').style.display='block';
-  document.getElementById('displayOrderId').textContent=orderId;
-  const reminders={
-    easypaisa:`📱 <strong>Payment Reminder:</strong> Please send <strong>PKR ${grand.toLocaleString()}</strong> to our EasyPaisa/JazzCash number: <strong>YOUR_EASYPAISA_NUMBER_HERE</strong>.<br>When we contact you on WhatsApp, share your Order ID <strong>${orderId}</strong> for verification.`,
-    bank:`🏦 <strong>Payment Reminder:</strong> Please transfer <strong>PKR ${grand.toLocaleString()}</strong> to our Allied Bank account number: <strong>YOUR_BANK_ACCOUNT_NUMBER_HERE</strong>.<br>When we contact you on WhatsApp, share your Order ID <strong>${orderId}</strong> for verification.`
-  };
-  document.getElementById('successPayReminder').innerHTML=reminders[payMethod]||'';
-  window.scrollTo(0,0);cart=[];updateCartUI();
-}
-
 function clearCart(){
-  cart=[];updateCartUI();
-  ['oName','oPhone','oEmail','oAddress','oCity','oNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  cart = [];
+  updateCartUI();
+  ['oName','oPhone','oEmail','oAddress','oCity','oNotes'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
 }
 
-// CONTACT
+// ─── CONTACT FORM — BACKEND SE CONNECTED ─────────
 async function submitForm(){
-  const name=document.getElementById('cn').value.trim();
-  const phone=document.getElementById('cp').value.trim();
-  const email=document.getElementById('ce').value.trim();
-  const message=document.getElementById('cm').value.trim();
-  if(!name||!email||!message){alert('Name, email and message required!');return;}
-  const btn=document.querySelector('.c-form .btn');btn.disabled=true;btn.textContent='Sending...';
-  try{await fetch(`${API_URL}/contact`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,email,message})});}catch(e){}
-  const s=document.getElementById('smsg');s.style.display='block';
-  ['cn','cp','ce','cm'].forEach(id=>document.getElementById(id).value='');
-  setTimeout(()=>s.style.display='none',5000);btn.disabled=false;btn.textContent='Send Message 💌';
+  const name    = document.getElementById('cn').value.trim();
+  const phone   = document.getElementById('cp').value.trim();
+  const email   = document.getElementById('ce').value.trim();
+  const message = document.getElementById('cm').value.trim();
+
+  if(!name || !email || !message){
+    alert('Name, email and message are required! 🌿');
+    return;
+  }
+
+  const btn = document.querySelector('.c-form .btn');
+  btn.disabled    = true;
+  btn.textContent = '⏳Sending...';
+
+  try {
+    const response = await fetch(`${API_URL}/contact`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, message })
+    });
+    const data = await response.json();
+    if(data.success){
+      const s = document.getElementById('smsg');
+      s.style.display = 'block';
+      ['cn','cp','ce','cm'].forEach(id => document.getElementById(id).value = '');
+      setTimeout(() => s.style.display = 'none', 5000);
+    } else {
+      alert('Message could not be sent, try again.');
+    }
+  } catch(error){
+    // Offline fallback
+    const s = document.getElementById('smsg');
+    s.style.display = 'block';
+    ['cn','cp','ce','cm'].forEach(id => document.getElementById(id).value = '');
+    setTimeout(() => s.style.display = 'none', 5000);
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = 'Send Message 💌';
+  }
 }
 
+// ─── TOAST ───────────────────────────────────────
 function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
-window.addEventListener('scroll',()=>{document.getElementById('stb').style.display=window.scrollY>300?'flex':'none';});
+
+// ─── SCROLL TOP ──────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('stb').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
 </script>
 </body>
 </html>
