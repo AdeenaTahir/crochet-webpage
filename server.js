@@ -56,9 +56,11 @@ const transporter = nodemailer.createTransport({
 });
 
 // ─── PAYMENT DETAILS ─────────────────────────────
+// ✅ FIX: jazzcash aur easypaisa dono keys hain taake koi bhi method kaam kare
 const PAYMENT_DETAILS = {
-  jazzcash: { number: '03235963246', name: 'Zahida bibi' },
-  bank: { bankName: 'jazz cash', accountNumber: '03235963246', accountTitle: 'Zahida bibi', iban: 'N/As' }
+  jazzcash:  { number: '03235963246', name: 'Zahida bibi' },
+  easypaisa: { number: '03235963246', name: 'Zahida bibi' },
+  bank: { bankName: 'jazz cash', accountNumber: '03235963246', accountTitle: 'Zahida bibi', iban: 'N/A' }
 };
 
 // ─── HELPERS ─────────────────────────────────────
@@ -145,9 +147,10 @@ app.post('/api/orders', async (req, res) => {
     const orders = readJSON(ORDERS_FILE); orders.push(order); writeJSON(ORDERS_FILE, orders);
 
     const itemsList = cartItems.map(i=>`• ${i.name} x${i.qty} — PKR ${(i.priceNum*i.qty).toLocaleString()}`).join('\n');
-    let payInfo = paymentMethod==='easypaisa'
-      ? `EasyPaisa/JazzCash\nSend: PKR ${totalAmount.toLocaleString()}\nTo: ${PAYMENT_DETAILS.easypaisa.number}\nName: ${PAYMENT_DETAILS.easypaisa.name}`
-      : `Allied Bank Transfer\nSend: PKR ${totalAmount.toLocaleString()}\nAccount: ${PAYMENT_DETAILS.bank.accountNumber}\nTitle: ${PAYMENT_DETAILS.bank.accountTitle}`;
+
+    // ✅ FIX: paymentMethod se sahi details lo
+    const payDetails = PAYMENT_DETAILS[paymentMethod] || PAYMENT_DETAILS.jazzcash;
+    let payInfo = `JazzCash\nSend: PKR ${totalAmount.toLocaleString()}\nTo: ${payDetails.number}\nName: ${payDetails.name}`;
 
     const adminMail = {
       from: process.env.EMAIL_USER, to: process.env.EMAIL_USER,
@@ -155,9 +158,6 @@ app.post('/api/orders', async (req, res) => {
       text: `NEW ORDER\n\nOrder ID: ${order.id}\nDate: ${new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'})}\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email||'N/A'}\nCity: ${city}\nAddress: ${address}\nNotes: ${notes||'None'}\n\nItems:\n${itemsList}\n\nPayment:\n${payInfo}\n\n⚠️ Verify payment before shipping!\nWhatsApp customer: ${phone}`
     };
     if (email) {
-      let payReminder = paymentMethod==='easypaisa'
-        ? `Send PKR ${totalAmount.toLocaleString()} to EasyPaisa: ${PAYMENT_DETAILS.easypaisa.number}`
-        : `Transfer PKR ${totalAmount.toLocaleString()} to Allied Bank: ${PAYMENT_DETAILS.bank.accountNumber}`;
       await transporter.sendMail({ from:process.env.EMAIL_USER, to:email, subject:'✅ Order Received — Crochet Craft',
         html:`<div style="font-family:sans-serif;max-width:500px;padding:20px;background:#faf6ef;border-radius:12px;">
           <h2 style="color:#7d9b76;">🧶 Crochet Craft</h2>
@@ -169,7 +169,7 @@ app.post('/api/orders', async (req, res) => {
             <strong>Payment:</strong> ${paymentMethod}
           </div>
           <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px;font-size:14px;color:#7a6318;">
-            💳 <strong>Payment Reminder:</strong> ${payReminder}<br>
+            💳 <strong>Payment Reminder:</strong> Send PKR ${totalAmount.toLocaleString()} to JazzCash: ${payDetails.number} (${payDetails.name})<br>
             Share your Order ID <strong>${order.id}</strong> when we contact you.
           </div>
           <p style="color:#7a6a5a;font-size:13px;margin-top:15px;">📞 03235963246 &nbsp;|&nbsp; 📧 craftcrochet605@gmail.com</p>
