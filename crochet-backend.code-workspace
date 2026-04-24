@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "crochet-backend",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5502,
+		"liveServer.settings.multiRootWorkspaceName": "crochet-backend"
+	}
+}

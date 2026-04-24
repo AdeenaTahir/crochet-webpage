@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crochet Craft — Admin Panel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:sans-serif;background:#f0ebe4;color:#3a3228;min-height:100vh;}
+header{background:#5c4a3a;color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+header h1{font-size:1.4rem;}
+header span{font-size:.85rem;opacity:.7;}
+.tabs{display:flex;gap:0;background:#fff;border-bottom:2px solid #ddeadb;padding:0 2rem;}
+.tab-btn{padding:.9rem 1.8rem;border:none;background:none;cursor:pointer;font-size:.9rem;font-weight:600;color:#7a6a5a;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;}
+.tab-btn.active{color:#7d9b76;border-bottom-color:#7d9b76;}
+.container{padding:2rem;max-width:1200px;margin:0 auto;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:#fff;border-radius:14px;padding:1.4rem;box-shadow:0 2px 12px rgba(90,74,58,.08);border-left:4px solid #7d9b76;}
+.stat-card h3{font-size:.8rem;color:#7a6a5a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;}
+.stat-card .num{font-size:2rem;font-weight:700;color:#3a3228;}
+.card{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 2px 16px rgba(90,74,58,.09);margin-bottom:1.5rem;}
+.card h2{font-size:1.1rem;margin-bottom:1.2rem;color:#5c4a3a;}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+th{text-align:left;padding:.7rem 1rem;background:#ddeadb;color:#5c4a3a;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;}
+td{padding:.75rem 1rem;border-bottom:1px solid #f0ebe4;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#faf6ef;}
+.badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-size:.75rem;font-weight:600;}
+.badge.pending{background:#fff3cd;color:#856404;}
+.badge.confirmed{background:#d1ecf1;color:#0c5460;}
+.badge.shipped{background:#cce5ff;color:#004085;}
+.badge.delivered{background:#d4edda;color:#155724;}
+.badge.cancelled{background:#f8d7da;color:#721c24;}
+select{padding:.3rem .6rem;border-radius:8px;border:1.5px solid #ddeadb;font-size:.82rem;cursor:pointer;background:#fff;}
+.btn-row{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center;}
+.refresh-btn{background:#7d9b76;color:#fff;border:none;padding:.6rem 1.4rem;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;transition:background .2s;}
+.refresh-btn:hover{background:#6a8a63;}
+.clear-btn{background:#fff;color:#c0392b;border:2px solid #f8d7da;padding:.6rem 1.4rem;border-radius:30px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;}
+.clear-btn:hover{background:#f8d7da;}
+.del-btn{background:#fff0f0;color:#c0392b;border:1.5px solid #f8d7da;padding:.28rem .7rem;border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;white-space:nowrap;}
+.del-btn:hover{background:#c0392b;color:#fff;border-color:#c0392b;}
+.edit-btn{background:#e8f4fd;color:#2980b9;border:1.5px solid #bee3f8;padding:.28rem .7rem;border-radius:8px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;white-space:nowrap;margin-right:.3rem;}
+.edit-btn:hover{background:#2980b9;color:#fff;}
+.loading{text-align:center;padding:2rem;color:#7a6a5a;}
+.empty{text-align:center;padding:3rem;color:#b5c9b0;font-size:1.1rem;}
+
+/* ── PRODUCT GRID ── */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:1rem;}
+.prod-card{background:#fff;border-radius:14px;border:1.5px solid #ddeadb;overflow:hidden;box-shadow:0 2px 10px rgba(90,74,58,.07);transition:transform .2s;}
+.prod-card:hover{transform:translateY(-3px);}
+.prod-card img{width:100%;height:160px;object-fit:cover;background:#f0ebe4;}
+.prod-card-body{padding:.9rem;}
+.prod-card-body h4{font-size:.95rem;font-weight:700;color:#3a3228;margin-bottom:.3rem;}
+.prod-card-body .price{color:#7d9b76;font-weight:700;font-size:1rem;margin-bottom:.2rem;}
+.prod-card-body .cat{font-size:.75rem;background:#ddeadb;color:#5c7a52;padding:.18rem .55rem;border-radius:12px;display:inline-block;margin-bottom:.6rem;}
+.prod-card-body .tag{font-size:.72rem;background:#fce4f0;color:#c47aa0;padding:.15rem .5rem;border-radius:10px;display:inline-block;margin-bottom:.6rem;margin-left:.3rem;}
+.prod-card-actions{display:flex;gap:.4rem;margin-top:.5rem;}
+
+/* ── ADD / EDIT PRODUCT FORM ── */
+.form-box{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 2px 16px rgba(90,74,58,.09);margin-bottom:1.5rem;border:2px solid #ddeadb;}
+.form-box h2{font-size:1.1rem;color:#5c4a3a;margin-bottom:1.2rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:.4rem;}
+.fg label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7a6a5a;}
+.fg input,.fg select,.fg textarea{padding:.7rem .9rem;border:1.8px solid #ddeadb;border-radius:10px;font-family:sans-serif;font-size:.92rem;background:#faf6ef;color:#3a3228;outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#7d9b76;}
+.fg textarea{resize:vertical;min-height:70px;}
+.fg .hint{font-size:.75rem;color:#b5c9b0;margin-top:.2rem;}
+.img-preview{width:100%;height:130px;object-fit:cover;border-radius:10px;background:#f0ebe4;display:block;margin-top:.5rem;border:1.5px dashed #b5c9b0;}
+.save-btn{background:#7d9b76;color:#fff;border:none;padding:.75rem 2rem;border-radius:30px;cursor:pointer;font-size:.95rem;font-weight:700;transition:background .2s;margin-top:1rem;}
+.save-btn:hover{background:#6a8a63;}
+.cancel-edit-btn{background:#f0ebe4;color:#7a6a5a;border:none;padding:.75rem 1.5rem;border-radius:30px;cursor:pointer;font-size:.95rem;font-weight:600;margin-top:1rem;margin-left:.5rem;}
+
+/* ── POPUP ── */
+.popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center;}
+.popup-overlay.show{display:flex;}
+.popup{background:#fff;border-radius:20px;padding:2.5rem 2rem;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.popup .p-icon{font-size:3rem;margin-bottom:.8rem;}
+.popup h3{font-size:1.2rem;margin-bottom:.6rem;color:#3a3228;}
+.popup p{color:#7a6a5a;font-size:.9rem;margin-bottom:1.8rem;line-height:1.7;white-space:pre-line;}
+.popup-btns{display:flex;gap:.8rem;justify-content:center;}
+.popup-btns button{padding:.7rem 1.8rem;border-radius:30px;cursor:pointer;font-size:.9rem;font-weight:600;border:none;transition:all .2s;}
+.btn-cancel{background:#f0ebe4;color:#7a6a5a;}.btn-cancel:hover{background:#e0d8cf;}
+.btn-confirm-del{background:#c0392b;color:#fff;}.btn-confirm-del:hover{background:#a93226;}
+</style>
+</head>
+<body>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <div class="p-icon">🗑️</div>
+    <h3 id="popupTitle">Are you sure?</h3>
+    <p id="popupMsg">This cannot be undone.</p>
+    <div class="popup-btns">
+      <button class="btn-cancel" onclick="closePopup()">Cancel</button>
+      <button class="btn-confirm-del" id="popupConfirmBtn">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <h1>🧶 Crochet Craft — Admin Panel</h1>
+  <span id="serverStatus">⏳ Checking server...</span>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('orders',this)">📦 Orders</button>
+  <button class="tab-btn" onclick="switchTab('products',this)">🛍️ Products</button>
+  <button class="tab-btn" onclick="switchTab('messages',this)">💌 Messages</button>
+</div>
+
+<div class="container">
+
+  <!-- ═══ ORDERS TAB ═══ -->
+  <div id="tab-orders" class="tab-content active">
+    <div class="stats">
+      <div class="stat-card"><h3>Total Orders</h3><div class="num" id="statTotal">—</div></div>
+      <div class="stat-card"><h3>Pending</h3><div class="num" id="statPending">—</div></div>
+      <div class="stat-card"><h3>Delivered</h3><div class="num" id="statDelivered">—</div></div>
+      <div class="stat-card"><h3>Total Revenue</h3><div class="num" id="statRevenue">—</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh Orders</button>
+      <button class="clear-btn" onclick="confirmClearAll('orders')">🗑️ Delete All Orders</button>
+    </div>
+    <div class="card">
+      <h2>📋 All Orders</h2>
+      <div id="ordersTable"><div class="loading">⏳ Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ PRODUCTS TAB ═══ -->
+  <div id="tab-products" class="tab-content">
+
+    <!-- ADD / EDIT FORM -->
+    <div class="form-box" id="productForm">
+      <h2 id="formTitle">➕ Add New Product</h2>
+      <input type="hidden" id="editProductId">
+      <div class="form-grid">
+        <div class="fg">
+          <label>Product Name *</label>
+          <input id="pName" type="text" placeholder="e.g. Pink Flower Studs">
+        </div>
+        <div class="fg">
+          <label>Price (PKR) *</label>
+          <input id="pPrice" type="number" placeholder="e.g. 300">
+        </div>
+        <div class="fg">
+          <label>Category *</label>
+          <select id="pCategory">
+            <option value="">-- Select Category --</option>
+            <option value="earrings">💎 Earrings</option>
+            <option value="hairpins">🪡 Hair Pins</option>
+            <option value="scrunchies">🌸 Scrunchies</option>
+            <option value="ribbons">🎀 Ribbons</option>
+            <option value="bandana">🧣 Bandana</option>
+            <option value="paranda">💫 Paranda</option>
+            <option value="headbands">👑 Headbands</option>
+            <option value="gloves">🧤 Gloves</option>
+            <option value="bracelets">📿 Bracelets</option>
+            <option value="keychains">🔑 Keychains</option>
+            <option value="gajray">🌺 Gajray</option>
+            <option value="bookmarks">📖 Bookmarks</option>
+            <option value="bookcovers">📚 Book Covers</option>
+            <option value="deals">🏷️ Deals</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Tag (optional)</label>
+          <input id="pTag" type="text" placeholder="e.g. Best Seller, New, Trending">
+        </div>
+        <div class="fg">
+          <label>Image Filename *</label>
+          <input id="pImage" type="text" placeholder="e.g. flower stud.png" oninput="previewImg(this.value)">
+          <span class="hint">File must be in your <strong>images/</strong> folder. Just write the filename.</span>
+          <img id="imgPreview" class="img-preview" src="" alt="Preview" onerror="this.style.opacity='0.3'" style="opacity:0;">
+        </div>
+        <div class="fg">
+          <label>Description (optional)</label>
+          <textarea id="pDesc" placeholder="Short description of the product..."></textarea>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" onclick="saveProduct()">💾 Save Product</button>
+        <button class="cancel-edit-btn" id="cancelEditBtn" onclick="resetForm()" style="display:none;">✕ Cancel Edit</button>
+      </div>
+    </div>
+
+    <!-- PRODUCTS LIST -->
+    <div class="btn-row">
+      <button class="refresh-btn" onclick="loadProducts()">🔄 Refresh Products</button>
+      <div id="prodCount" style="font-size:.9rem;color:#7a6a5a;margin-left:.5rem;"></div>
+    </div>
+    <div id="productsGrid"><div class="loading">⏳ Loading...</div></div>
+  </div>
+
+  <!-- ═══ MESSAGES TAB ═══ -->
+  <div id="tab-messages" class="tab-content">
+    <div class="btn-row">
+      <button class="refresh-btn" onclick="loadMessages()">🔄 Refresh Messages</button>
+      <button class="clear-btn" onclick="confirmClearAll('messages')">🗑️ Delete All Messages</button>
+    </div>
+    <div class="card">
+      <h2>💌 Contact Messages</h2>
+      <div id="messagesTable"><div class="loading">⏳ Loading...</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API_URL = 'https://crochet-webpage-production.up.railway.app';
+
+// ── POPUP ──────────────────────────────────────────
+function showPopup(title,msg,action){
+  document.getElementById('popupTitle').textContent=title;
+  document.getElementById('popupMsg').textContent=msg;
+  document.getElementById('popupOverlay').classList.add('show');
+  document.getElementById('popupConfirmBtn').onclick=()=>{closePopup();action&&action();};
+}
+function closePopup(){document.getElementById('popupOverlay').classList.remove('show');}
+document.getElementById('popupOverlay').addEventListener('click',function(e){if(e.target===this)closePopup();});
+
+// ── TAB SWITCH ─────────────────────────────────────
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+  if(tab==='orders')   loadOrders();
+  if(tab==='products') loadProducts();
+  if(tab==='messages') loadMessages();
+}
+
+// ── SERVER CHECK ───────────────────────────────────
+async function checkServer(){
+  try{
+    await fetch(`${API}/health`);
+    document.getElementById('serverStatus').textContent='✅ Server Online';
+  }catch{
+    document.getElementById('serverStatus').textContent='❌ Server Offline';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  PRODUCTS
+// ═══════════════════════════════════════════════════
+let editingId = null;
+
+function previewImg(filename){
+  const img=document.getElementById('imgPreview');
+  if(!filename){img.style.opacity='0';return;}
+  const src = filename.startsWith('images/') ? filename : 'images/'+filename;
+  img.src=src; img.style.opacity='1';
+}
+
+async function loadProducts(){
+  document.getElementById('productsGrid').innerHTML='<div class="loading">⏳ Loading products...</div>';
+  try{
+    const r=await fetch(`${API}/products`);
+    const d=await r.json();
+    const products=d.products||[];
+    document.getElementById('prodCount').textContent=`Total: ${products.length} products`;
+    if(products.length===0){document.getElementById('productsGrid').innerHTML='<div class="empty">📭 No products yet. Add one above!</div>';return;}
+    document.getElementById('productsGrid').innerHTML=`<div class="prod-grid">${products.map(p=>`
+      <div class="prod-card" id="pcard-${p.id}">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='';this.style.background='#ddeadb';">
+        <div class="prod-card-body">
+          <div>
+            <span class="cat">${p.category}</span>
+            ${p.tag?`<span class="tag">${p.tag}</span>`:''}
+          </div>
+          <h4>${p.name}</h4>
+          <div class="price">PKR ${p.price.toLocaleString()}</div>
+          <div style="font-size:.78rem;color:#7a6a5a;margin-bottom:.5rem;">${p.description||''}</div>
+          <div class="prod-card-actions">
+            <button class="edit-btn" onclick="editProduct(${JSON.stringify(p).replace(/"/g,'&quot;')})">✏️ Edit</button>
+            <button class="del-btn" onclick="confirmDeleteProduct('${p.id}','${p.name.replace(/'/g,'')}')">🗑 Delete</button>
+          </div>
+        </div>
+      </div>`).join('')}</div>`;
+  }catch{
+    document.getElementById('productsGrid').innerHTML='<div class="empty">❌ Could not load products. Is server running?</div>';
+  }
+}
+
+function editProduct(p){
+  editingId=p.id;
+  document.getElementById('editProductId').value=p.id;
+  document.getElementById('pName').value=p.name;
+  document.getElementById('pPrice').value=p.price;
+  document.getElementById('pCategory').value=p.category;
+  document.getElementById('pTag').value=p.tag||'';
+  // Show just filename in input
+  const imgName=p.image.replace('images/','');
+  document.getElementById('pImage').value=imgName;
+  document.getElementById('pDesc').value=p.description||'';
+  document.getElementById('formTitle').textContent='✏️ Edit Product';
+  document.getElementById('cancelEditBtn').style.display='inline-block';
+  previewImg(imgName);
+  document.getElementById('productForm').scrollIntoView({behavior:'smooth'});
+}
+
+function resetForm(){
+  editingId=null;
+  document.getElementById('editProductId').value='';
+  ['pName','pPrice','pImage','pTag','pDesc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pCategory').value='';
+  document.getElementById('imgPreview').style.opacity='0';
+  document.getElementById('formTitle').textContent='➕ Add New Product';
+  document.getElementById('cancelEditBtn').style.display='none';
+}
+
+async function saveProduct(){
+  const name=document.getElementById('pName').value.trim();
+  const price=document.getElementById('pPrice').value.trim();
+  const category=document.getElementById('pCategory').value;
+  const image=document.getElementById('pImage').value.trim();
+  const tag=document.getElementById('pTag').value.trim();
+  const description=document.getElementById('pDesc').value.trim();
+
+  if(!name||!price||!category||!image){
+    alert('Please fill: Product Name, Price, Category and Image Filename.');return;
+  }
+
+  const body={name,price:Number(price),category,image,tag,description};
+  const url  = editingId ? `${API}/products/${editingId}` : `${API}/products`;
+  const method = editingId ? 'PUT' : 'POST';
+
+  try{
+    const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(d.success){
+      alert(editingId ? '✅ Product updated!' : '✅ Product added!');
+      resetForm();
+      loadProducts();
+    } else {
+      alert('Error: '+d.message);
+    }
+  }catch{
+    alert('❌ Could not connect to server. Make sure server is running.');
+  }
+}
+
+function confirmDeleteProduct(id,name){
+  showPopup('Delete Product?',`"${name}" will be permanently deleted.\nThis cannot be undone!`,async()=>{
+    try{
+      const r=await fetch(`${API}/products/${id}`,{method:'DELETE'});
+      const d=await r.json();
+      if(d.success){
+        const card=document.getElementById('pcard-'+id);
+        if(card){card.style.transition='opacity .3s';card.style.opacity='0';}
+        setTimeout(()=>loadProducts(),350);
+      }else{alert('Failed: '+d.message);}
+    }catch{alert('Server error.');}
+  });
+}
+
+// ═══════════════════════════════════════════════════
+//  ORDERS
+// ═══════════════════════════════════════════════════
+async function loadOrders(){
+  document.getElementById('ordersTable').innerHTML='<div class="loading">⏳ Loading...</div>';
+  try{
+    const r=await fetch(`${API}/orders`);const d=await r.json();const orders=d.orders||[];
+    document.getElementById('statTotal').textContent=orders.length;
+    document.getElementById('statPending').textContent=orders.filter(o=>o.status==='pending').length;
+    document.getElementById('statDelivered').textContent=orders.filter(o=>o.status==='delivered').length;
+    document.getElementById('statRevenue').textContent='PKR '+orders.reduce((s,o)=>s+(o.totalAmount||0),0).toLocaleString();
+    if(orders.length===0){document.getElementById('ordersTable').innerHTML='<div class="empty">📭 No orders yet.</div>';return;}
+    document.getElementById('ordersTable').innerHTML=`<table>
+      <thead><tr><th>Order ID</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Delete</th></tr></thead>
+      <tbody>${orders.map(o=>`<tr id="row-${o.id}">
+        <td><strong style="font-size:.8rem;">${o.id}</strong></td>
+        <td>${new Date(o.createdAt).toLocaleDateString('en-PK')}</td>
+        <td><strong>${o.customer?.name}</strong><br><span style="font-size:.8rem;color:#7a6a5a;">${o.customer?.phone}</span><br><span style="font-size:.75rem;color:#b5c9b0;">${o.customer?.city}</span></td>
+        <td style="font-size:.82rem;color:#7a6a5a;">${(o.cartItems||[]).map(i=>`• ${i.name} ×${i.qty}`).join('<br>')}</td>
+        <td><strong style="color:#7d9b76;">PKR ${(o.totalAmount||0).toLocaleString()}</strong></td>
+        <td style="font-size:.82rem;">${o.paymentMethod||'—'}</td>
+        <td>
+          <span class="badge ${o.status}">${o.status}</span><br>
+          <select style="margin-top:.4rem;" onchange="updateStatus('${o.id}',this.value)">
+            <option value="">Change...</option>
+            <option value="pending">pending</option><option value="confirmed">confirmed</option>
+            <option value="shipped">shipped</option><option value="delivered">delivered</option>
+            <option value="cancelled">cancelled</option>
+          </select>
+        </td>
+        <td><button class="del-btn" onclick="confirmDeleteOrder('${o.id}','${(o.customer?.name||'').replace(/'/g,'')}')">🗑 Delete</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  }catch{document.getElementById('ordersTable').innerHTML='<div class="empty">❌ Server not connected.</div>';}
+}
+
+async function updateStatus(id,status){
+  if(!status)return;
+  try{const r=await fetch(`${API}/orders/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});const d=await r.json();if(d.success)loadOrders();}catch{alert('❌ Update failed.');}
+}
+
+function confirmDeleteOrder(id,name){
+  showPopup('Delete Order?',`Order from "${name}" will be deleted.\nThis cannot be undone!`,async()=>{
+    try{const r=await fetch(`${API}/orders/${id}`,{method:'DELETE'});const d=await r.json();if(d.success){const row=document.getElementById('row-'+id);if(row){row.style.transition='opacity .3s';row.style.opacity='0';}setTimeout(()=>loadOrders(),400);}else alert('Failed: '+d.message);}catch{alert('Server error.');}
+  });
+}
+
+function confirmClearAll(type){
+  showPopup('Delete All?',type==='orders'?'All orders will be deleted.\nThis cannot be undone!':'All messages will be deleted.\nThis cannot be undone!',async()=>{
+    try{const r=await fetch(`${API}/${type}`,{method:'DELETE'});const d=await r.json();if(d.success){type==='orders'?loadOrders():loadMessages();}else alert('Failed.');}catch{alert('Server error.');}
+  });
+}
+
+// ═══════════════════════════════════════════════════
+//  MESSAGES
+// ═══════════════════════════════════════════════════
+async function loadMessages(){
+  document.getElementById('messagesTable').innerHTML='<div class="loading">⏳ Loading...</div>';
+  try{
+    const r=await fetch(`${API}/messages`);const d=await r.json();const msgs=d.messages||[];
+    if(msgs.length===0){document.getElementById('messagesTable').innerHTML='<div class="empty">📭 No messages yet.</div>';return;}
+    document.getElementById('messagesTable').innerHTML=`<table>
+      <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Message</th><th>Delete</th></tr></thead>
+      <tbody>${msgs.map(m=>`<tr id="row-${m.id}">
+        <td style="font-size:.8rem;">${new Date(m.createdAt).toLocaleDateString('en-PK')}</td>
+        <td><strong>${m.name}</strong></td><td>${m.phone||'—'}</td><td>${m.email}</td>
+        <td style="max-width:280px;font-size:.85rem;">${m.message}</td>
+        <td><button class="del-btn" onclick="confirmDeleteMsg('${m.id}','${(m.name||'').replace(/'/g,'')}')">🗑 Delete</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  }catch{document.getElementById('messagesTable').innerHTML='<div class="empty">❌ Server not connected.</div>';}
+}
+
+function confirmDeleteMsg(id,name){
+  showPopup('Delete Message?',`Message from "${name}" will be deleted.\nThis cannot be undone!`,async()=>{
+    try{const r=await fetch(`${API}/messages/${id}`,{method:'DELETE'});const d=await r.json();if(d.success){const row=document.getElementById('row-'+id);if(row){row.style.transition='opacity .3s';row.style.opacity='0';}setTimeout(()=>loadMessages(),400);}else alert('Failed: '+d.message);}catch{alert('Server error.');}
+  });
+}
+
+// ── INIT ──────────────────────────────────────────
+checkServer();
+loadOrders();
+</script>
+</body>
+</html>

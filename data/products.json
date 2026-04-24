@@ -1,0 +1,119 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Blush Flower Studs",
+    "price": 280,
+    "category": "earrings",
+    "image": "images/flower stud.png",
+    "tag": "Best Seller",
+    "description": "Soft blush pink crochet flower with pearl centre."
+  },
+  {
+    "id": "prod-2",
+    "name": "Hot Pink Flower Studs",
+    "price": 300,
+    "category": "earrings",
+    "image": "images/hot pink stud.png",
+    "tag": "Bold Look",
+    "description": "Bold hot pink crochet flower studs with pearl."
+  },
+  {
+    "id": "prod-3",
+    "name": "Crochet Bow Dangles",
+    "price": 200,
+    "category": "earrings",
+    "image": "images/bow earings.png",
+    "tag": "Trending",
+    "description": "Hot pink crocheted bow dangle earrings."
+  },
+  {
+    "id": "prod-4",
+    "name": "Red Heart Studs",
+    "price": 260,
+    "category": "earrings",
+    "image": "images/heart studs.png",
+    "tag": "Gift Idea",
+    "description": "Crocheted red heart stud earrings."
+  },
+  {
+    "id": "prod-5",
+    "name": "Floral Crochet Hair Pins",
+    "price": 200,
+    "category": "hairpins",
+    "image": "images/hair pin.webp",
+    "tag": "Set of 6",
+    "description": "Beautiful handmade hair pins."
+  },
+  {
+    "id": "prod-6",
+    "name": "Crochet Scrunchie Set",
+    "price": 1000,
+    "category": "scrunchies",
+    "image": "images/scrunchiess.webp",
+    "tag": "Best Seller",
+    "description": "Fluffy crochet scrunchies in 5 shades."
+  },
+  {
+    "id": "prod-7",
+    "name": "Boho Crochet Headband",
+    "price": 420,
+    "category": "headbands",
+    "image": "images/headband.webp",
+    "tag": "Top Pick",
+    "description": "Wide boho headband in sage green."
+  },
+  {
+    "id": "prod-8",
+    "name": "Daisy Chain Bracelet",
+    "price": 250,
+    "category": "bracelets",
+    "image": "images/bracelet.webp",
+    "tag": "Best Seller",
+    "description": "Dainty daisy crochet bracelet."
+  },
+  {
+    "id": "prod-9",
+    "name": "Rose Gajra Set",
+    "price": 1000,
+    "category": "gajray",
+    "image": "images/gajray.png",
+    "tag": "Bridal",
+    "description": "Set of 2 crochet rose gajra bun wraps."
+  },
+  {
+    "id": "prod-10",
+    "name": "Flower Bookmark",
+    "price": 180,
+    "category": "bookmarks",
+    "image": "images/bookmark.webp",
+    "tag": "Gift Idea",
+    "description": "Crochet flower bookmark with tassel."
+  },
+  {
+    "id": "prod-11",
+    "name": "Mehndi Paranda",
+    "price": 450,
+    "category": "paranda",
+    "image": "images/rose paranda.png",
+    "tag": "Festive",
+    "description": "Multicolour paranda for celebrations."
+  },
+  {
+    "id": "prod-12",
+    "name": "Cute Sunflower Keychain",
+    "price": 450,
+    "category": "keychains",
+    "image": "images/sunflower keychain.webp",
+    "tag": "Trending",
+    "description": "Adorable crocheted bag charm."
+  },
+  {
+    "id": "prod-1776857703144",
+    "name": "gajray",
+    "price": 450,
+    "category": "gajray",
+    "image": "images/rose paranda.png",
+    "tag": "",
+    "description": ""
+  }
+]

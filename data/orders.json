@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ORD-1776864559700",
+    "createdAt": "2026-04-22T13:29:19.701Z",
+    "status": "pending",
+    "customer": {
+      "name": "rumaisa malik",
+      "phone": "03923562378",
+      "email": "rumi345@gmail.com",
+      "address": "house no 4,jinnahbad",
+      "city": "Abbottabad",
+      "notes": "yes want a gift rap"
+    },
+    "paymentMethod": "jazzcash",
+    "cartItems": [
+      {
+        "name": "Book Mark",
+        "priceStr": "PKR 200",
+        "priceNum": 200,
+        "img": "images/bookmark.webp",
+        "qty": 1,
+        "id": 1776864464184
+      }
+    ],
+    "totalAmount": 350
+  }
+]
