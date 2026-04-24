@@ -57,8 +57,8 @@ const transporter = nodemailer.createTransport({
 
 // ─── PAYMENT DETAILS ─────────────────────────────
 const PAYMENT_DETAILS = {
-  easypaisa: { number: 'YOUR_EASYPAISA_NUMBER_HERE', name: 'YOUR_NAME_HERE' },
-  bank: { bankName: 'Allied Bank Limited (ABL)', accountNumber: 'YOUR_BANK_ACCOUNT_NUMBER_HERE', accountTitle: 'YOUR_ACCOUNT_TITLE_HERE', iban: 'YOUR_IBAN_HERE' }
+  jazzcash: { number: '03235963246', name: 'Zahida bibi' },
+  bank: { bankName: 'jazz cash', accountNumber: '03235963246', accountTitle: 'Zahida bibi', iban: 'N/As' }
 };
 
 // ─── HELPERS ─────────────────────────────────────
@@ -233,7 +233,7 @@ app.listen(PORT, () => {
 🧶 ══════════════════════════════════════
    CROCHET CRAFT SERVER RUNNING!
    Website    : http://localhost:${PORT}
-   Admin Panel: http://localhost:${PORT}/admin.html
+   Admin Panel: http://localhost:${PORT}/index.html
    Products   : data/products.json
 ══════════════════════════════════════ 🧶`);
 });
