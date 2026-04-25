@@ -13,6 +13,10 @@ const path       = require('path');
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
+// ─── ENV CHECK (Railway debug ke liye) ───────────
+console.log('🔧 EMAIL_USER:', process.env.EMAIL_USER ? '✅ Set' : '❌ NOT SET');
+console.log('🔧 EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Set' : '❌ NOT SET');
+
 // ─── MIDDLEWARE ──────────────────────────────────
 app.use(cors({ origin: function(origin, cb){ cb(null, true); }, methods: ['GET','POST','PUT','DELETE','OPTIONS'], allowedHeaders: ['Content-Type'] }));
 app.options('*', cors());
@@ -20,7 +24,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ─── DATA FILES ──────────────────────────────────
-const DATA_DIR      = path.join(__dirname, 'data');
+// Railway Volume /data use karega (permanent), locally ./data folder use hoga
+const DATA_DIR      = process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(__dirname, 'data');
 const ORDERS_FILE   = path.join(DATA_DIR, 'orders.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
@@ -47,16 +52,28 @@ const DEFAULT_PRODUCTS = [
 if (!fs.existsSync(PRODUCTS_FILE)) fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(DEFAULT_PRODUCTS, null, 2));
 
 // ─── EMAIL CONFIG ────────────────────────────────
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'craftcrochet605@gmail.com',
-    pass: process.env.EMAIL_PASS || 'ocjf rcwf vscv hxsn'
+    user: EMAIL_USER,
+    pass: EMAIL_PASS
+  }
+});
+
+// Email connection verify on startup
+transporter.verify(function(error, success) {
+  if (error) {
+    console.error('❌ EMAIL ERROR — Could not connect to Gmail:', error.message);
+    console.error('   Check EMAIL_USER and EMAIL_PASS in Railway variables!');
+  } else {
+    console.log('✅ Email transporter ready — Gmail connected!');
   }
 });
 
 // ─── PAYMENT DETAILS ─────────────────────────────
-// ✅ FIX: jazzcash aur easypaisa dono keys hain taake koi bhi method kaam kare
 const PAYMENT_DETAILS = {
   jazzcash:  { number: '03235963246', name: 'Zahida bibi' },
   easypaisa: { number: '03235963246', name: 'Zahida bibi' },
@@ -71,20 +88,17 @@ function writeJSON(f,d) { fs.writeFileSync(f, JSON.stringify(d,null,2)); }
 //  PRODUCTS API
 // ══════════════════════════════════════════════════
 
-// GET all products
 app.get('/api/products', (req, res) => {
   const products = readJSON(PRODUCTS_FILE);
   res.json({ success: true, products });
 });
 
-// GET products by category
 app.get('/api/products/category/:cat', (req, res) => {
   const products = readJSON(PRODUCTS_FILE);
   const filtered = products.filter(p => p.category === req.params.cat);
   res.json({ success: true, products: filtered });
 });
 
-// POST — add new product
 app.post('/api/products', (req, res) => {
   const { name, price, category, image, tag, description } = req.body;
   if (!name || !price || !category || !image) {
@@ -104,7 +118,6 @@ app.post('/api/products', (req, res) => {
   res.json({ success: true, message: 'Product added!', product: newProduct });
 });
 
-// PUT — edit product
 app.put('/api/products/:id', (req, res) => {
   const products = readJSON(PRODUCTS_FILE);
   const idx = products.findIndex(p => p.id === req.params.id);
@@ -125,7 +138,6 @@ app.put('/api/products/:id', (req, res) => {
   res.json({ success: true, message: 'Product updated!', product: products[idx] });
 });
 
-// DELETE one product
 app.delete('/api/products/:id', (req, res) => {
   const products = readJSON(PRODUCTS_FILE);
   const newList  = products.filter(p => p.id !== req.params.id);
@@ -148,17 +160,21 @@ app.post('/api/orders', async (req, res) => {
 
     const itemsList = cartItems.map(i=>`• ${i.name} x${i.qty} — PKR ${(i.priceNum*i.qty).toLocaleString()}`).join('\n');
 
-    // ✅ FIX: paymentMethod se sahi details lo
     const payDetails = PAYMENT_DETAILS[paymentMethod] || PAYMENT_DETAILS.jazzcash;
     let payInfo = `JazzCash\nSend: PKR ${totalAmount.toLocaleString()}\nTo: ${payDetails.number}\nName: ${payDetails.name}`;
 
     const adminMail = {
-      from: process.env.EMAIL_USER, to: process.env.EMAIL_USER,
+      from: EMAIL_USER,
+      to: EMAIL_USER,
       subject: `🛒 New Order! ${order.id} — PKR ${totalAmount.toLocaleString()}`,
       text: `NEW ORDER\n\nOrder ID: ${order.id}\nDate: ${new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'})}\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email||'N/A'}\nCity: ${city}\nAddress: ${address}\nNotes: ${notes||'None'}\n\nItems:\n${itemsList}\n\nPayment:\n${payInfo}\n\n⚠️ Verify payment before shipping!\nWhatsApp customer: ${phone}`
     };
+
     if (email) {
-      await transporter.sendMail({ from:process.env.EMAIL_USER, to:email, subject:'✅ Order Received — Crochet Craft',
+      await transporter.sendMail({
+        from: EMAIL_USER,
+        to: email,
+        subject:'✅ Order Received — Crochet Craft',
         html:`<div style="font-family:sans-serif;max-width:500px;padding:20px;background:#faf6ef;border-radius:12px;">
           <h2 style="color:#7d9b76;">🧶 Crochet Craft</h2>
           <h3>Thank you, ${name}! ❤️</h3>
@@ -175,15 +191,20 @@ app.post('/api/orders', async (req, res) => {
           <p style="color:#7a6a5a;font-size:13px;margin-top:15px;">📞 03235963246 &nbsp;|&nbsp; 📧 craftcrochet605@gmail.com</p>
           <p style="color:#b5c9b0;font-size:12px;">— Crochet Craft Team 🌿</p>
         </div>`
-      }).catch(e=>console.error('Customer email error:',e));
+      }).catch(e => console.error('❌ Customer email error:', e.message));
     }
-    await transporter.sendMail(adminMail).catch(e=>console.error('Admin email error:',e));
+
+    await transporter.sendMail(adminMail).catch(e => console.error('❌ Admin email error:', e.message));
     console.log('✅ Order saved:', order.id);
     res.json({ success:true, message:'Order placed!', orderId:order.id });
-  } catch(e) { console.error('Order error:',e); res.status(500).json({success:false,message:'Server error.'}); }
+  } catch(e) {
+    console.error('❌ Order error:', e);
+    res.status(500).json({success:false, message:'Server error.'});
+  }
 });
 
 app.get('/api/orders', (req,res) => res.json({success:true, orders:readJSON(ORDERS_FILE).reverse()}));
+
 app.put('/api/orders/:id', (req,res) => {
   const valid = ['pending','confirmed','shipped','delivered','cancelled'];
   if (!valid.includes(req.body.status)) return res.status(400).json({success:false,message:'Invalid status.'});
@@ -193,11 +214,13 @@ app.put('/api/orders/:id', (req,res) => {
   writeJSON(ORDERS_FILE, orders);
   res.json({success:true, message:`Status updated to ${req.body.status}.`});
 });
+
 app.delete('/api/orders/:id', (req,res) => {
   const orders = readJSON(ORDERS_FILE), filtered = orders.filter(o=>o.id!==req.params.id);
   if (orders.length===filtered.length) return res.status(404).json({success:false,message:'Not found.'});
   writeJSON(ORDERS_FILE,filtered); res.json({success:true,message:'Order deleted.'});
 });
+
 app.delete('/api/orders', (req,res) => { writeJSON(ORDERS_FILE,[]); res.json({success:true,message:'All orders deleted.'}); });
 
 // ══════════════════════════════════════════════════
@@ -210,22 +233,36 @@ app.post('/api/contact', async (req,res) => {
     const msgs = readJSON(MESSAGES_FILE);
     msgs.push({id:'MSG-'+Date.now(),createdAt:new Date().toISOString(),name,phone,email,message});
     writeJSON(MESSAGES_FILE,msgs);
-    await transporter.sendMail({from:process.env.EMAIL_USER,to:process.env.EMAIL_USER,subject:`💌 New Message — ${name}`,text:`Name: ${name}\nPhone: ${phone||'N/A'}\nEmail: ${email}\n\nMessage:\n${message}`}).catch(e=>console.error(e));
+    await transporter.sendMail({
+      from: EMAIL_USER,
+      to: EMAIL_USER,
+      subject:`💌 New Message — ${name}`,
+      text:`Name: ${name}\nPhone: ${phone||'N/A'}\nEmail: ${email}\n\nMessage:\n${message}`
+    }).catch(e=>console.error('❌ Contact email error:', e.message));
     res.json({success:true,message:'Message sent!'});
   } catch(e) { res.status(500).json({success:false,message:'Server error.'}); }
 });
+
 app.get('/api/messages', (req,res) => res.json({success:true, messages:readJSON(MESSAGES_FILE).reverse()}));
+
 app.delete('/api/messages/:id', (req,res) => {
   const msgs=readJSON(MESSAGES_FILE), filtered=msgs.filter(m=>m.id!==req.params.id);
   if (msgs.length===filtered.length) return res.status(404).json({success:false,message:'Not found.'});
   writeJSON(MESSAGES_FILE,filtered); res.json({success:true,message:'Message deleted.'});
 });
+
 app.delete('/api/messages', (req,res) => { writeJSON(MESSAGES_FILE,[]); res.json({success:true,message:'All messages deleted.'}); });
 
 // ══════════════════════════════════════════════════
 //  HEALTH + ROOT
 // ══════════════════════════════════════════════════
-app.get('/api/health', (req,res) => res.json({success:true, message:'🌿 Server is running!', time:new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'})}));
+app.get('/api/health', (req,res) => res.json({
+  success: true,
+  message: '🌿 Server is running!',
+  time: new Date().toLocaleString('en-PK',{timeZone:'Asia/Karachi'}),
+  emailConfigured: !!(EMAIL_USER && EMAIL_PASS)
+}));
+
 app.get('/', (req,res) => res.sendFile(path.join(__dirname,'public','index.html')));
 
 app.listen(PORT, () => {
@@ -235,5 +272,6 @@ app.listen(PORT, () => {
    Website    : http://localhost:${PORT}
    Admin Panel: http://localhost:${PORT}/index.html
    Products   : data/products.json
+   Email User : ${EMAIL_USER || '❌ NOT SET'}
 ══════════════════════════════════════ 🧶`);
 });
