@@ -52,8 +52,8 @@ const DEFAULT_PRODUCTS = [
 if (!fs.existsSync(PRODUCTS_FILE)) fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(DEFAULT_PRODUCTS, null, 2));
 
 // ─── EMAIL CONFIG ────────────────────────────────
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS;
+const EMAIL_USER = (process.env.EMAIL_USER || '').trim();
+const EMAIL_PASS = (process.env.EMAIL_PASS || '').trim();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
